@@ -4,8 +4,10 @@ import PageHero from "@/components/public/PageHero";
 import SectionHeader from "@/components/ui/SectionHeader";
 import TrustMetricsBanner from "@/components/public/TrustMetricsBanner";
 import TeamCapabilities from "@/components/public/TeamCapabilities";
+import TestimonialsSection from "@/components/public/TestimonialsSection";
 import RegionalPresence from "@/components/public/RegionalPresence";
 import Button from "@/components/ui/Button";
+import { getPublishedTestimonials } from "@/lib/queries/publicData";
 import {
   Target,
   Compass,
@@ -27,7 +29,9 @@ export const metadata: Metadata = {
     "Learn about Ariiti Tech's corporate mission, values, and practical approach to software engineering and commercial IT infrastructure across Eastern Ethiopia.",
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const testimonials = await getPublishedTestimonials();
+
   return (
     <div className="space-y-20 pb-20">
       {/* 1. Modular Page Hero */}
@@ -149,7 +153,10 @@ export default function AboutPage() {
       {/* 5. Dedicated Operational Units & Field Specialists */}
       <TeamCapabilities />
 
-      {/* 6. Regional Presence & Physical Infrastructure Hubs */}
+      {/* 6. Verified Client Deployment Testimonials */}
+      <TestimonialsSection testimonials={testimonials} />
+
+      {/* 7. Regional Presence & Physical Infrastructure Hubs */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <RegionalPresence />
       </section>
