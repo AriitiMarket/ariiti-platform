@@ -24,9 +24,9 @@ export default async function ProductsPage() {
     <div className="space-y-16 pb-20">
       {/* 1. Modular Page Hero */}
       <PageHero
-        eyebrow="Software Product Ecosystem"
-        title="Specialized Software Built for Regional Commercial Resilience."
-        description="As a parent technology enterprise, Ariiti Tech designs, incubates, and supports specialized commercial software applications tailored to Eastern Ethiopia’s connectivity and operational environments."
+        eyebrow="Products & Solutions"
+        title="Practical Technology Products Built to Simplify Business Operations"
+        description="Explore practical technology products developed by Ariiti Tech, engineered with offline resilience, low-bandwidth optimization, and local peripheral support for Eastern Ethiopian enterprises."
       >
         {/* Status Transparency Standards Legend */}
         <div className="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-sm max-w-3xl">

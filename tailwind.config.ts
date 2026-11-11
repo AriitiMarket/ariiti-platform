@@ -9,11 +9,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        brand: {
+          primary: "var(--brand-primary)",
+          "primary-hover": "var(--brand-primary-hover)",
+          secondary: "var(--brand-secondary)",
+          surface: "var(--brand-surface)",
+          "surface-subtle": "var(--brand-surface-subtle)",
+          border: "var(--brand-border)",
+          "text-primary": "var(--brand-text-primary)",
+          "text-body": "var(--brand-text-body)",
+          "text-muted": "var(--brand-text-muted)",
+        },
         ariiti: {
-          navy: "#20305C",
-          dark: "#141414",
-          light: "#F8FAFC",
-          accent: "#2563EB",
+          navy: "#093053",
+          dark: "#093053",
+          light: "#FFFFFF",
+          accent: "#093053",
           muted: "#64748B",
         },
       },

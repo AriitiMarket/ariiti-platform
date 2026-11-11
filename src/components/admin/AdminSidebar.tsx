@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -19,11 +19,11 @@ import {
   History,
   ExternalLink,
   ChevronRight,
-  Menu,
   X,
 } from "lucide-react";
 import { UserRole } from "@/models/User";
 import { cn } from "@/lib/utils";
+import AriitiLogo from "@/components/ui/AriitiLogo";
 
 interface AdminSidebarProps {
   role?: UserRole;
@@ -156,27 +156,20 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
   };
 
   const sidebarContent = (
-    <div className="flex flex-col h-full bg-slate-900 border-r border-slate-800 select-none">
-      {/* Brand Header */}
-      <div className="p-4 border-b border-slate-800 flex items-center justify-between shrink-0">
-        <Link href="/admin" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-ariiti-navy border border-blue-500/30 flex items-center justify-center text-white shadow-sm shrink-0">
-            <span className="font-black text-base text-blue-400">A</span>
-          </div>
-          <div>
-            <span className="font-black text-sm tracking-tight text-white block">
-              ARIITI TECH
-            </span>
-            <span className="text-[9px] uppercase font-mono tracking-widest text-slate-400 block -mt-0.5">
-              Admin Platform
-            </span>
-          </div>
-        </Link>
+    <div className="flex flex-col h-full bg-brand-primary border-r border-[#0d3f6d] select-none text-white">
+      {/* Brand Header with Official Ariiti Tech Logo */}
+      <div className="p-4 border-b border-[#0d3f6d] flex items-center justify-between shrink-0">
+        <AriitiLogo
+          variant="light"
+          size="sm"
+          href="/admin"
+          subtitle="Admin Platform"
+        />
 
         {onCloseMobile && (
           <button
             onClick={onCloseMobile}
-            className="md:hidden p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800"
+            className="md:hidden p-1.5 text-white/80 hover:text-white rounded-lg hover:bg-white/10"
             aria-label="Close menu"
           >
             <X className="w-5 h-5" />
@@ -185,7 +178,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
       </div>
 
       {/* Navigation Sections */}
-      <nav className="p-3 space-y-5 flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-800">
+      <nav className="p-3 space-y-5 flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-white/20">
         {navigationSections.map((section) => {
           // Filter items by role
           const visibleItems = section.items.filter(
@@ -196,7 +189,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
 
           return (
             <div key={section.title} className="space-y-1">
-              <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono">
+              <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-white/70 font-mono">
                 {section.title}
               </div>
               <div className="space-y-0.5 mt-1">
@@ -212,23 +205,16 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
                       className={cn(
                         "flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-150 group",
                         active
-                          ? "bg-ariiti-accent text-white shadow-sm font-bold"
-                          : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                          ? "bg-white text-brand-primary shadow-sm font-bold [&_svg]:text-brand-primary"
+                          : "text-white/90 hover:bg-white/10 hover:text-white [&_svg]:text-white"
                       )}
                     >
                       <div className="flex items-center gap-2.5 truncate">
-                        <Icon
-                          className={cn(
-                            "w-4 h-4 shrink-0",
-                            active
-                              ? "text-white"
-                              : "text-slate-400 group-hover:text-slate-200"
-                          )}
-                        />
+                        <Icon className="w-4 h-4 shrink-0 transition-colors" />
                         <span className="truncate">{item.name}</span>
                       </div>
                       {active && (
-                        <ChevronRight className="w-3.5 h-3.5 text-white/70 shrink-0" />
+                        <ChevronRight className="w-3.5 h-3.5 text-brand-primary/80 shrink-0" />
                       )}
                     </Link>
                   );
@@ -240,14 +226,14 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
       </nav>
 
       {/* Live Website Shortcut */}
-      <div className="p-3 border-t border-slate-800 shrink-0">
+      <div className="p-3 border-t border-[#0d3f6d] shrink-0">
         <Link
           href="/"
           target="_blank"
-          className="flex items-center justify-between px-3 py-2 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 text-xs text-slate-300 hover:text-white transition-colors"
+          className="flex items-center justify-between px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-xs text-white transition-colors"
         >
           <span className="font-medium text-[11px]">View Live Website</span>
-          <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+          <ExternalLink className="w-3.5 h-3.5 text-white/80" />
         </Link>
       </div>
     </div>
@@ -267,7 +253,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
             className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm transition-opacity"
             onClick={onCloseMobile}
           />
-          <div className="relative w-64 max-w-[80vw] h-full z-10">
+          <div className="relative w-64 max-w-[80vw] h-full z-10 shadow-2xl">
             {sidebarContent}
           </div>
         </div>

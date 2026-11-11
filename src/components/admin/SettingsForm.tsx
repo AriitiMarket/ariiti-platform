@@ -152,25 +152,25 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl pb-16">
       {feedback && (
-        <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-3 text-xs text-emerald-300">
-          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+        <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center gap-3 text-xs text-emerald-800">
+          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
           <span>{feedback}</span>
         </div>
       )}
 
       {error && (
-        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center gap-3 text-xs text-red-300">
-          <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+        <div className="p-4 rounded-xl bg-red-50 border border-red-200 flex items-center gap-3 text-xs text-red-800">
+          <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
           <span>{error}</span>
         </div>
       )}
 
       {/* 1. Emergency SLA Announcement Banner */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-        <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-4">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
           <div className="flex items-center gap-2">
-            <Megaphone className="w-4 h-4 text-amber-400" />
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-200 font-mono">
+            <Megaphone className="w-4 h-4 text-amber-600" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-brand-primary font-mono">
               Live Announcement & Emergency SLA Banner
             </h3>
           </div>
@@ -179,9 +179,9 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
               type="checkbox"
               checked={bannerActive}
               onChange={(e) => setBannerActive(e.target.checked)}
-              className="w-4 h-4 rounded border-slate-700 bg-slate-950 text-ariiti-accent focus:ring-ariiti-accent"
+              className="w-4 h-4 rounded border-slate-300 text-brand-primary focus:ring-brand-primary"
             />
-            <span className="text-xs font-bold text-amber-400 font-mono">
+            <span className="text-xs font-bold text-amber-600 font-mono">
               {bannerActive ? "BANNER ACTIVE (LIVE)" : "BANNER DISABLED"}
             </span>
           </label>
@@ -189,7 +189,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
 
         <div className="space-y-3">
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Banner Announcement Text
             </label>
             <input
@@ -197,12 +197,12 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
               value={bannerText}
               onChange={(e) => setBannerText(e.target.value)}
               placeholder="e.g. ⚡ 2-Hour Guaranteed Emergency On-Site Dispatch active across Harar & Dire Dawa."
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Action URL (Optional Link)
             </label>
             <input
@@ -210,24 +210,24 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
               value={bannerLinkUrl}
               onChange={(e) => setBannerLinkUrl(e.target.value)}
               placeholder="/contact or https://..."
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 font-mono focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 placeholder-slate-400 font-mono focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
             />
           </div>
         </div>
       </div>
 
       {/* 2. Corporate Contact Details */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-        <div className="flex items-center gap-2 pb-3 border-b border-slate-800">
-          <Phone className="w-4 h-4 text-ariiti-accent" />
-          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-200 font-mono">
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-4">
+        <div className="flex items-center gap-2 pb-3 border-b border-slate-100">
+          <Phone className="w-4 h-4 text-brand-primary" />
+          <h3 className="text-xs font-bold uppercase tracking-wider text-brand-primary font-mono">
             Direct Commercial Contact & Telephony
           </h3>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Primary Phone Number *
             </label>
             <input
@@ -236,12 +236,12 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
               value={primaryPhone}
               onChange={(e) => setPrimaryPhone(e.target.value)}
               placeholder="+251915000000"
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 font-mono focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 font-mono focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Secondary / Hotline Phone
             </label>
             <input
@@ -249,12 +249,12 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
               value={secondaryPhone}
               onChange={(e) => setSecondaryPhone(e.target.value)}
               placeholder="+251920000000"
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 font-mono focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 font-mono focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Direct WhatsApp Number * (No + sign, e.g. 251915000000)
             </label>
             <input
@@ -263,12 +263,12 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
               value={whatsappNumber}
               onChange={(e) => setWhatsappNumber(e.target.value)}
               placeholder="251915000000"
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-emerald-400 font-mono font-bold focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-emerald-700 font-mono font-bold focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Official Corporate Email *
             </label>
             <input
@@ -277,21 +277,21 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
               value={businessEmail}
               onChange={(e) => setBusinessEmail(e.target.value)}
               placeholder="contact@ariititech.com"
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 font-mono focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 font-mono focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
             />
           </div>
         </div>
       </div>
 
       {/* 3. Company Identity & Tagline */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-200 font-mono pb-3 border-b border-slate-800">
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-4">
+        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-primary font-mono pb-3 border-b border-slate-100">
           Company Identity
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Legal / Brand Name *
             </label>
             <input
@@ -299,12 +299,12 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
               required
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Official Corporate Tagline *
             </label>
             <input
@@ -312,17 +312,17 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
               required
               value={tagline}
               onChange={(e) => setTagline(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
             />
           </div>
         </div>
       </div>
 
       {/* 4. Physical Office Hubs */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-        <div className="flex items-center gap-2 pb-3 border-b border-slate-800">
-          <MapPin className="w-4 h-4 text-emerald-400" />
-          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-200 font-mono">
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-4">
+        <div className="flex items-center gap-2 pb-3 border-b border-slate-100">
+          <MapPin className="w-4 h-4 text-emerald-600" />
+          <h3 className="text-xs font-bold uppercase tracking-wider text-brand-primary font-mono">
             Regional Office Hubs & Service Desks
           </h3>
         </div>
@@ -335,13 +335,13 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
                 value={loc}
                 onChange={(e) => handleLocationChange(idx, e.target.value)}
                 placeholder="e.g. Harar Hub: Kebele 14, Commercial District, Harar, Ethiopia"
-                className="flex-1 px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+                className="flex-1 px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
               />
               {locations.length > 1 && (
                 <button
                   type="button"
                   onClick={() => removeLocation(idx)}
-                  className="p-2 text-slate-500 hover:text-red-400"
+                  className="p-2 text-slate-400 hover:text-red-500"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -352,7 +352,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
         <button
           type="button"
           onClick={addLocation}
-          className="text-xs font-bold text-ariiti-accent hover:text-blue-300 flex items-center gap-1"
+          className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
         >
           <Plus className="w-3.5 h-3.5" />
           <span>Add Another Office Location</span>
@@ -360,17 +360,17 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
       </div>
 
       {/* 5. Official Social Links */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-        <div className="flex items-center gap-2 pb-3 border-b border-slate-800">
-          <Share2 className="w-4 h-4 text-blue-400" />
-          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-200 font-mono">
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-4">
+        <div className="flex items-center gap-2 pb-3 border-b border-slate-100">
+          <Share2 className="w-4 h-4 text-brand-primary" />
+          <h3 className="text-xs font-bold uppercase tracking-wider text-brand-primary font-mono">
             Social Media & Communication Channels
           </h3>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Telegram Channel URL
             </label>
             <input
@@ -378,12 +378,12 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
               value={telegram}
               onChange={(e) => setTelegram(e.target.value)}
               placeholder="https://t.me/aritiiteck"
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 font-mono focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 font-mono focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Facebook Page URL
             </label>
             <input
@@ -391,12 +391,12 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
               value={facebook}
               onChange={(e) => setFacebook(e.target.value)}
               placeholder="https://facebook.com/..."
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 font-mono focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 font-mono focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               LinkedIn Organization URL
             </label>
             <input
@@ -404,12 +404,12 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
               value={linkedin}
               onChange={(e) => setLinkedin(e.target.value)}
               placeholder="https://linkedin.com/company/..."
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 font-mono focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 font-mono focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               GitHub Organization URL
             </label>
             <input
@@ -417,7 +417,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
               value={github}
               onChange={(e) => setGithub(e.target.value)}
               placeholder="https://github.com/AriitiTech"
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 font-mono focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 font-mono focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
             />
           </div>
         </div>
@@ -428,7 +428,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
         <button
           type="submit"
           disabled={isPending}
-          className="px-6 py-2.5 rounded-xl bg-ariiti-accent hover:bg-blue-600 active:bg-blue-700 text-white text-xs font-bold flex items-center gap-2 shadow-lg shadow-blue-600/20 disabled:opacity-50"
+          className="px-6 py-2.5 rounded-xl bg-brand-primary hover:bg-brand-primary-hover active:bg-[#061e35] text-white text-xs font-bold flex items-center gap-2 shadow-sm disabled:opacity-50"
         >
           {isPending ? (
             <>

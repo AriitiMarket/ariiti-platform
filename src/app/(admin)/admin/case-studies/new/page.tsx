@@ -8,7 +8,7 @@ export default function NewCaseStudyPage() {
     <div className="space-y-6">
       <Link
         href="/admin/case-studies"
-        className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-white transition-colors"
+        className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-primary hover:underline transition-colors"
       >
         <ChevronLeft className="w-4 h-4" />
         <span>Back to Case Studies Directory</span>
@@ -16,15 +16,15 @@ export default function NewCaseStudyPage() {
 
       <div>
         <div className="flex items-center gap-2 mb-1">
-          <Plus className="w-4 h-4 text-ariiti-accent" />
-          <span className="text-xs font-mono uppercase tracking-wider text-ariiti-accent font-bold">
+          <Plus className="w-4 h-4 text-brand-primary" />
+          <span className="text-xs font-mono uppercase tracking-wider text-brand-primary font-bold">
             CMS Authoring Studio
           </span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-black text-brand-primary tracking-tight">
           Publish New Case Study
         </h1>
-        <p className="text-xs sm:text-sm text-slate-400 mt-1">
+        <p className="text-xs sm:text-sm text-slate-600 mt-1">
           Document an authentic B2B client deployment, infrastructure installation, or proprietary system deployment.
         </p>
       </div>

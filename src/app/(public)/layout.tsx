@@ -16,7 +16,7 @@ export default async function PublicLayout({
     <>
       <AnnouncementBanner banner={settings.announcementBanner} />
       <Navbar settings={settings} />
-      <main className="min-h-screen bg-ariiti-light flex-1">{children}</main>
+      <main className="min-h-screen bg-white flex-1">{children}</main>
       <Footer settings={settings} />
       <WhatsAppFloatingButton phone={settings.whatsappNumber} />
     </>

@@ -6,7 +6,6 @@ import PageHero from "@/components/public/PageHero";
 import SectionHeader from "@/components/ui/SectionHeader";
 import TeamCapabilities from "@/components/public/TeamCapabilities";
 import RegionalPresence from "@/components/public/RegionalPresence";
-import TrustMetricsBanner from "@/components/public/TrustMetricsBanner";
 import Button from "@/components/ui/Button";
 import {
   ShieldCheck,
@@ -19,6 +18,10 @@ import {
   Cpu,
   MapPin,
 } from "lucide-react";
+import connectDB from "@/lib/mongodb";
+import TeamMember from "@/models/TeamMember";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Engineering Team & Operational Units | Ariiti Tech",
@@ -26,7 +29,7 @@ export const metadata: Metadata = {
     "Meet Ariiti Tech's on-the-ground engineering leads, network architects, and dedicated SLA field technicians stationed in Harar and Dire Dawa.",
 };
 
-const TEAM_MEMBERS = [
+const FALLBACK_MEMBERS = [
   {
     name: "Lead Systems Architect",
     role: "Head of Software Engineering & Offline POS",
@@ -65,7 +68,32 @@ const TEAM_MEMBERS = [
   },
 ];
 
-export default function TeamPage() {
+export default async function TeamPage() {
+  let members = FALLBACK_MEMBERS;
+
+  try {
+    await connectDB();
+    const dbMembers = await TeamMember.find({ isActive: true })
+      .sort({ order: 1, createdAt: -1 })
+      .lean();
+
+    if (dbMembers && dbMembers.length > 0) {
+      members = dbMembers.map((m: any) => ({
+        name: m.name,
+        role: m.role,
+        department: m.department,
+        bio: m.bio,
+        location: m.location,
+        skills: m.skills || [],
+        imageUrl: m.imageUrl || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+        inquiryTopic: m.inquiryTopic || "Technical Consultation",
+        inquiryHref: m.inquiryHref || "/contact",
+      }));
+    }
+  } catch {
+    members = FALLBACK_MEMBERS;
+  }
+
   return (
     <div className="space-y-12 sm:space-y-16 pb-20">
       {/* 1. Page Hero */}
@@ -95,36 +123,36 @@ export default function TeamPage() {
           className="mb-10"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {TEAM_MEMBERS.map((member, idx) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {members.map((member, idx) => (
             <div
               key={idx}
-              className="flex flex-col bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 overflow-hidden text-left"
+              className="flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-md hover:border-slate-300 transition-all duration-200 overflow-hidden text-left justify-between"
             >
               {/* Photo */}
-              <div className="relative h-64 w-full bg-slate-900 overflow-hidden">
-                <Image
-                  src={member.imageUrl}
-                  alt={member.name}
-                  fill
-                  className="object-cover object-top hover:scale-105 transition-transform duration-300"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
-                <div className="absolute bottom-3 left-3 right-3 text-white">
-                  <span className="text-[10px] font-mono font-bold uppercase bg-ariiti-accent text-white px-2 py-0.5 rounded">
-                    {member.department}
-                  </span>
-                  <h3 className="text-lg font-bold mt-1 text-white">{member.name}</h3>
-                  <p className="text-xs text-slate-300">{member.role}</p>
+              <div>
+                <div className="relative h-64 w-full bg-[#093053] overflow-hidden">
+                  <Image
+                    src={member.imageUrl}
+                    alt={member.name}
+                    fill
+                    className="object-cover object-top hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#093053]/90 via-[#093053]/20 to-transparent" />
+                  <div className="absolute bottom-3 left-3 right-3 text-white">
+                    <span className="text-[10px] font-mono font-bold uppercase bg-brand-primary text-white px-2 py-0.5 rounded border border-white/20">
+                      {member.department}
+                    </span>
+                    <h3 className="text-lg font-bold mt-1 text-white">{member.name}</h3>
+                    <p className="text-xs text-white/80">{member.role}</p>
+                  </div>
                 </div>
-              </div>
 
-              {/* Body */}
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-3">
-                    <MapPin className="w-3.5 h-3.5 text-ariiti-accent shrink-0" />
+                {/* Body */}
+                <div className="p-6">
+                  <div className="flex items-center gap-1.5 text-xs text-slate-600 mb-3 bg-slate-50 p-2 rounded-lg border border-slate-200">
+                    <MapPin className="w-3.5 h-3.5 text-brand-primary shrink-0" />
                     <span>{member.location}</span>
                   </div>
 
@@ -133,7 +161,7 @@ export default function TeamPage() {
                   </p>
 
                   <div className="space-y-1.5 mb-6">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block font-mono">
                       Core Competencies:
                     </span>
                     <div className="flex flex-wrap gap-1.5">
@@ -148,10 +176,12 @@ export default function TeamPage() {
                     </div>
                   </div>
                 </div>
+              </div>
 
+              <div className="p-6 pt-0">
                 <Link
                   href={member.inquiryHref}
-                  className="w-full flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-slate-50 hover:bg-ariiti-navy hover:text-white border border-slate-200 text-xs font-bold text-ariiti-navy transition-colors"
+                  className="w-full flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-xs font-bold text-brand-primary transition-all shadow-xs"
                 >
                   <span>Connect with {member.name.split(" ")[0]}</span>
                   <ArrowRight className="w-3.5 h-3.5" />

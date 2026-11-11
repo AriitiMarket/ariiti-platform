@@ -32,15 +32,15 @@ export default async function AdminProductsPage() {
       {/* Header */}
       <div>
         <div className="flex items-center gap-2 mb-1">
-          <Box className="w-4 h-4 text-ariiti-accent" />
-          <span className="text-xs font-mono uppercase tracking-wider text-ariiti-accent font-bold">
+          <Box className="w-4 h-4 text-brand-primary" />
+          <span className="text-xs font-mono uppercase tracking-wider text-brand-primary font-bold">
             Product Portfolio Management
           </span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-black text-brand-primary tracking-tight">
           Ariiti Software Ecosystem Products
         </h1>
-        <p className="text-xs sm:text-sm text-slate-400 mt-1">
+        <p className="text-xs sm:text-sm text-slate-600 mt-1">
           Control lifecycle progression from IN_DEVELOPMENT and TESTING to commercially AVAILABLE deployments with immediate on-demand ISR.
         </p>
       </div>

@@ -35,7 +35,7 @@ export const DeleteCaseStudyButton: React.FC<DeleteCaseStudyButtonProps> = ({
       type="button"
       disabled={isPending}
       onClick={handleDelete}
-      className="p-1.5 rounded-lg bg-slate-800 hover:bg-red-500/20 text-slate-400 hover:text-red-400 transition-colors border border-slate-700/60 disabled:opacity-50"
+      className="p-1.5 rounded-lg bg-white hover:bg-rose-50 text-slate-400 hover:text-rose-600 transition-colors border border-slate-200 shadow-2xs disabled:opacity-50"
       title="Delete case study"
     >
       {isPending ? (

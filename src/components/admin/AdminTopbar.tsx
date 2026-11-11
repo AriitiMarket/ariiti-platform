@@ -16,7 +16,6 @@ import {
   Box,
   Wrench,
   Inbox,
-  User as UserIcon,
 } from "lucide-react";
 import { UserRole } from "@/models/User";
 import { globalAdminSearch } from "@/actions/adminCmsActions";
@@ -37,15 +36,15 @@ const ROLE_BADGES: Record<
 > = {
   SUPER_ADMIN: {
     label: "Super Admin",
-    className: "bg-purple-500/10 text-purple-400 border-purple-500/30",
+    className: "bg-purple-50 text-purple-700 border-purple-200",
   },
   CONTENT_MANAGER: {
     label: "Content Manager",
-    className: "bg-blue-500/10 text-blue-400 border-blue-500/30",
+    className: "bg-blue-50 text-blue-700 border-blue-200",
   },
   OPERATIONS: {
     label: "Operations",
-    className: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30",
+    className: "bg-emerald-50 text-emerald-700 border-emerald-200",
   },
 };
 
@@ -108,26 +107,26 @@ export const AdminTopbar: React.FC<AdminTopbarProps> = ({
   const getResultIcon = (type: string) => {
     switch (type) {
       case "Inquiry":
-        return <Inbox className="w-3.5 h-3.5 text-blue-400" />;
+        return <Inbox className="w-3.5 h-3.5 text-brand-primary" />;
       case "Case Study":
-        return <FileCode className="w-3.5 h-3.5 text-purple-400" />;
+        return <FileCode className="w-3.5 h-3.5 text-purple-600" />;
       case "Product":
-        return <Box className="w-3.5 h-3.5 text-emerald-400" />;
+        return <Box className="w-3.5 h-3.5 text-emerald-600" />;
       case "Service":
-        return <Wrench className="w-3.5 h-3.5 text-amber-400" />;
+        return <Wrench className="w-3.5 h-3.5 text-brand-primary" />;
       default:
         return <Search className="w-3.5 h-3.5 text-slate-400" />;
     }
   };
 
   return (
-    <header className="h-16 bg-slate-900 border-b border-slate-800 px-4 sm:px-6 flex items-center justify-between text-white shrink-0 gap-4">
+    <header className="h-16 bg-white border-b border-slate-200 px-4 sm:px-6 flex items-center justify-between text-brand-primary shrink-0 gap-4 shadow-xs">
       {/* Left: Mobile Toggle & Search Bar */}
       <div className="flex items-center gap-3 flex-1 max-w-xl">
         {onToggleMobileMenu && (
           <button
             onClick={onToggleMobileMenu}
-            className="md:hidden p-2 text-slate-300 hover:text-white rounded-lg hover:bg-slate-800 focus:outline-none"
+            className="md:hidden p-2 text-brand-primary hover:text-brand-primary/80 rounded-lg hover:bg-slate-100 focus:outline-none"
             aria-label="Toggle navigation"
           >
             <Menu className="w-5 h-5" />
@@ -137,7 +136,7 @@ export const AdminTopbar: React.FC<AdminTopbarProps> = ({
         {/* Global Search Component */}
         <div ref={searchRef} className="relative w-full max-w-md">
           <div className="relative">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-brand-primary absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
@@ -146,17 +145,17 @@ export const AdminTopbar: React.FC<AdminTopbarProps> = ({
                 if (searchResults.length > 0) setShowResults(true);
               }}
               placeholder="Search inquiries, services, products, portfolio..."
-              className="w-full pl-9 pr-8 py-1.5 text-xs bg-slate-950/80 border border-slate-700/80 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:border-ariiti-accent focus:ring-1 focus:ring-ariiti-accent"
+              className="w-full pl-9 pr-8 py-1.5 text-xs bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary shadow-xs"
             />
             {isSearching ? (
-              <Loader2 className="w-3.5 h-3.5 text-slate-400 animate-spin absolute right-2.5 top-1/2 -translate-y-1/2" />
+              <Loader2 className="w-3.5 h-3.5 text-brand-primary animate-spin absolute right-2.5 top-1/2 -translate-y-1/2" />
             ) : searchQuery ? (
               <button
                 onClick={() => {
                   setSearchQuery("");
                   setShowResults(false);
                 }}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -165,8 +164,8 @@ export const AdminTopbar: React.FC<AdminTopbarProps> = ({
 
           {/* Search Dropdown Results */}
           {showResults && searchResults.length > 0 && (
-            <div className="absolute left-0 right-0 top-full mt-1.5 bg-slate-950 border border-slate-800 rounded-xl shadow-2xl overflow-hidden z-50 divide-y divide-slate-800/80">
-              <div className="px-3 py-1.5 bg-slate-900 text-[10px] uppercase font-mono tracking-wider text-slate-400">
+            <div className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-2xl overflow-hidden z-50 divide-y divide-slate-100">
+              <div className="px-3 py-1.5 bg-slate-50 text-[10px] uppercase font-mono tracking-wider text-slate-500 font-bold border-b border-slate-200">
                 Matching Records ({searchResults.length})
               </div>
               <div className="max-h-72 overflow-y-auto">
@@ -179,21 +178,21 @@ export const AdminTopbar: React.FC<AdminTopbarProps> = ({
                       setSearchQuery("");
                       router.push(result.href);
                     }}
-                    className="w-full text-left px-3.5 py-2.5 hover:bg-slate-900/90 flex items-center justify-between group transition-colors"
+                    className="w-full text-left px-3.5 py-2.5 hover:bg-slate-50 flex items-center justify-between group transition-colors"
                   >
                     <div className="flex items-center gap-2.5 truncate">
                       {getResultIcon(result.type)}
                       <div className="truncate">
-                        <p className="text-xs font-semibold text-slate-200 group-hover:text-white truncate">
+                        <p className="text-xs font-semibold text-slate-900 group-hover:text-brand-primary truncate">
                           {result.title}
                         </p>
-                        <p className="text-[10px] text-slate-400 font-mono">
+                        <p className="text-[10px] text-slate-500 font-mono">
                           {result.type}
                         </p>
                       </div>
                     </div>
                     {result.badge && (
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 shrink-0 ml-2">
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-700 shrink-0 ml-2 border border-slate-200">
                         {result.badge}
                       </span>
                     )}
@@ -210,33 +209,33 @@ export const AdminTopbar: React.FC<AdminTopbarProps> = ({
         {/* Inquiries Notification */}
         <Link
           href="/admin/inquiries"
-          className="relative p-2 rounded-lg bg-slate-800/60 hover:bg-slate-800 text-slate-300 hover:text-white transition-colors"
+          className="relative p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-brand-primary transition-colors border border-slate-200"
           title={`${unreadCount} New Inquiries`}
         >
-          <Bell className="w-4 h-4" />
+          <Bell className="w-4 h-4 text-brand-primary" />
           {unreadCount > 0 && (
-            <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-blue-600 text-[9px] font-black font-mono flex items-center justify-center text-white ring-2 ring-slate-900 animate-pulse">
+            <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-brand-primary text-[9px] font-black font-mono flex items-center justify-center text-white ring-2 ring-white animate-pulse">
               {unreadCount > 9 ? "9+" : unreadCount}
             </span>
           )}
         </Link>
 
-        {/* View Public Website */}
+        {/* View Public Website (Secondary Button: White with deep navy border and text) */}
         <Link
           href="/"
           target="_blank"
-          className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/60 hover:bg-slate-800 text-slate-300 hover:text-white text-xs font-semibold transition-colors border border-slate-700/50"
+          className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-brand-primary text-xs font-bold transition-colors border border-brand-primary shadow-xs"
         >
           <span>View Site</span>
-          <ExternalLink className="w-3 h-3 text-slate-400" />
+          <ExternalLink className="w-3 h-3 text-brand-primary" />
         </Link>
 
-        <div className="h-5 w-px bg-slate-800 hidden sm:block" />
+        <div className="h-5 w-px bg-slate-200 hidden sm:block" />
 
         {/* User Profile Info */}
         <div className="flex items-center gap-3">
           <div className="hidden sm:block text-right">
-            <p className="text-xs font-bold text-slate-200 leading-tight">
+            <p className="text-xs font-bold text-brand-primary leading-tight">
               {user?.name || "Staff Member"}
             </p>
             <span
@@ -249,7 +248,7 @@ export const AdminTopbar: React.FC<AdminTopbarProps> = ({
           <button
             type="button"
             onClick={handleSignOut}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-red-500/20 text-slate-300 hover:text-red-400 text-xs font-bold transition-all border border-slate-700/60"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white hover:bg-red-50 text-slate-700 hover:text-red-600 text-xs font-bold transition-all border border-slate-200 shadow-xs"
             title="Sign out of administration session"
           >
             <LogOut className="w-3.5 h-3.5" />

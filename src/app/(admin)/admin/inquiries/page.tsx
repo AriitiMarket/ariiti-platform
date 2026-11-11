@@ -33,15 +33,15 @@ export default async function AdminInquiriesPage() {
       {/* Header */}
       <div>
         <div className="flex items-center gap-2 mb-1">
-          <Inbox className="w-4 h-4 text-ariiti-accent" />
-          <span className="text-xs font-mono uppercase tracking-wider text-ariiti-accent font-bold">
+          <Inbox className="w-4 h-4 text-brand-primary" />
+          <span className="text-xs font-mono uppercase tracking-wider text-brand-primary font-bold">
             Customer Ingestion Engine
           </span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-          Inquiries & Leads Management
+        <h1 className="text-2xl sm:text-3xl font-black text-brand-primary tracking-tight">
+          Inquiries &amp; Leads Management
         </h1>
-        <p className="text-xs sm:text-sm text-slate-400 mt-1">
+        <p className="text-xs sm:text-sm text-slate-600 mt-1">
           Review, filter, track status transitions, and append internal engineering notes to inbound commercial inquiries.
         </p>
       </div>

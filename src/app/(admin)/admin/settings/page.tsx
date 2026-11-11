@@ -38,15 +38,15 @@ export default async function AdminSettingsPage() {
     <div className="space-y-6 max-w-4xl">
       <div>
         <div className="flex items-center gap-2 mb-1">
-          <Settings className="w-4 h-4 text-purple-400" />
-          <span className="text-xs font-mono uppercase tracking-wider text-purple-400 font-bold">
+          <Settings className="w-4 h-4 text-brand-primary" />
+          <span className="text-xs font-mono uppercase tracking-wider text-brand-primary font-bold">
             Super Admin Restricted
           </span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-black text-brand-primary tracking-tight">
           Global Platform Settings
         </h1>
-        <p className="text-xs sm:text-sm text-slate-400 mt-1">
+        <p className="text-xs sm:text-sm text-slate-500 mt-1">
           Manage corporate contact endpoints, emergency SLA announcement banners, office locations, and communication channels.
         </p>
       </div>

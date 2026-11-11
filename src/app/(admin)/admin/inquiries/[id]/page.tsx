@@ -9,16 +9,10 @@ import { buildWhatsAppUrl } from "@/lib/utils";
 import {
   ChevronLeft,
   Phone,
-  Mail,
-  MapPin,
   Building,
-  Calendar,
   MessageSquare,
-  Clock,
-  ArrowRight,
-  ShieldCheck,
+  MapPin,
   User,
-  ExternalLink,
 } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -53,38 +47,38 @@ export default async function SingleInquiryPage({
       {/* Back Link */}
       <Link
         href="/admin/inquiries"
-        className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-white transition-colors"
+        className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-primary hover:underline transition-colors"
       >
         <ChevronLeft className="w-4 h-4" />
         <span>Back to Inquiries Workspace</span>
       </Link>
 
-      {/* Top Banner Header */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xl">
+      {/* Top Banner Header: White background with subtle borders and shadows */}
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm text-slate-900">
         <div>
           <div className="flex items-center gap-2 mb-2">
             <span
               className={`text-[10px] font-bold font-mono px-2.5 py-1 rounded border uppercase ${
                 inquiry.status === "NEW"
-                  ? "bg-blue-500/10 text-blue-400 border-blue-500/30 animate-pulse"
+                  ? "bg-blue-50 text-blue-700 border-blue-200 animate-pulse"
                   : inquiry.status === "CONTACTED"
-                  ? "bg-amber-500/10 text-amber-400 border-amber-500/30"
-                  : "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
+                  ? "bg-amber-50 text-amber-700 border-amber-200"
+                  : "bg-emerald-50 text-emerald-700 border-emerald-200"
               }`}
             >
               Status: {inquiry.status}
             </span>
-            <span className="text-xs text-slate-400 font-mono">
+            <span className="text-xs text-slate-500 font-mono">
               Ref #{inquiry._id.toString().slice(-6).toUpperCase()}
             </span>
           </div>
 
-          <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+          <h1 className="text-xl sm:text-2xl font-black text-brand-primary tracking-tight">
             {inquiry.customerName}
           </h1>
 
           {inquiry.businessName && (
-            <p className="text-xs sm:text-sm text-slate-300 font-medium mt-0.5 flex items-center gap-1.5">
+            <p className="text-xs sm:text-sm text-slate-600 font-medium mt-0.5 flex items-center gap-1.5">
               <Building className="w-3.5 h-3.5 text-slate-400" />
               <span>{inquiry.businessName}</span>
             </p>
@@ -97,7 +91,7 @@ export default async function SingleInquiryPage({
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-md shadow-emerald-700/20"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-sm"
           >
             <Phone className="w-3.5 h-3.5" />
             <span>Chat on WhatsApp</span>
@@ -105,9 +99,9 @@ export default async function SingleInquiryPage({
 
           <a
             href={`tel:${inquiry.phone}`}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition-all border border-slate-700"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-brand-primary text-xs font-bold transition-all border border-brand-primary shadow-xs"
           >
-            <Phone className="w-3.5 h-3.5 text-blue-400" />
+            <Phone className="w-3.5 h-3.5 text-brand-primary" />
             <span>Call {inquiry.phone}</span>
           </a>
 
@@ -118,8 +112,8 @@ export default async function SingleInquiryPage({
       {/* Two Column Layout: Inbound Metadata + Project Description */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Left Column: Client Attributes (1 col) */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono pb-2 border-b border-slate-800">
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4 shadow-sm text-slate-900">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-mono pb-2 border-b border-slate-100">
             Client Details
           </h3>
 
@@ -128,7 +122,7 @@ export default async function SingleInquiryPage({
               <span className="text-[10px] uppercase font-mono text-slate-500 block">
                 Phone Number
               </span>
-              <span className="font-bold text-slate-200 font-mono">
+              <span className="font-bold text-slate-900 font-mono">
                 {inquiry.phone}
               </span>
             </div>
@@ -138,7 +132,7 @@ export default async function SingleInquiryPage({
                 <span className="text-[10px] uppercase font-mono text-slate-500 block">
                   Email Address
                 </span>
-                <span className="font-medium text-slate-300 font-mono">
+                <span className="font-medium text-slate-700 font-mono">
                   {inquiry.email}
                 </span>
               </div>
@@ -148,8 +142,8 @@ export default async function SingleInquiryPage({
               <span className="text-[10px] uppercase font-mono text-slate-500 block">
                 Location
               </span>
-              <span className="font-bold text-slate-200 flex items-center gap-1 mt-0.5">
-                <MapPin className="w-3.5 h-3.5 text-ariiti-accent" />
+              <span className="font-bold text-slate-900 flex items-center gap-1 mt-0.5">
+                <MapPin className="w-3.5 h-3.5 text-brand-primary" />
                 <span>{inquiry.location}</span>
               </span>
             </div>
@@ -158,7 +152,7 @@ export default async function SingleInquiryPage({
               <span className="text-[10px] uppercase font-mono text-slate-500 block">
                 Service Category
               </span>
-              <span className="font-medium text-slate-300 font-mono">
+              <span className="font-medium text-slate-700 font-mono">
                 {inquiry.serviceCategory}
               </span>
             </div>
@@ -167,7 +161,7 @@ export default async function SingleInquiryPage({
               <span className="text-[10px] uppercase font-mono text-slate-500 block">
                 Submitted At
               </span>
-              <span className="font-medium text-slate-400 font-mono">
+              <span className="font-medium text-slate-500 font-mono">
                 {inquiry.createdAt
                   ? new Date(inquiry.createdAt).toLocaleString()
                   : "N/A"}
@@ -175,11 +169,11 @@ export default async function SingleInquiryPage({
             </div>
 
             {inquiry.referralContext && (
-              <div className="pt-2 border-t border-slate-800">
+              <div className="pt-2 border-t border-slate-100">
                 <span className="text-[10px] uppercase font-mono text-slate-500 block">
                   Referral Origin
                 </span>
-                <div className="text-[11px] text-slate-400 space-y-0.5 mt-1 font-mono">
+                <div className="text-[11px] text-slate-500 space-y-0.5 mt-1 font-mono">
                   {inquiry.referralContext.sourcePage && (
                     <p>Page: {inquiry.referralContext.sourcePage}</p>
                   )}
@@ -198,24 +192,24 @@ export default async function SingleInquiryPage({
         {/* Right Column: Project Requirements + Internal Notes Timeline (2 cols) */}
         <div className="md:col-span-2 space-y-6">
           {/* Project Requirements */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono mb-2">
-              Customer Requirements & Scope Description
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm text-slate-900">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-mono mb-2">
+              Customer Requirements &amp; Scope Description
             </h3>
-            <h4 className="text-sm font-bold text-ariiti-accent mb-3">
+            <h4 className="text-sm font-bold text-brand-primary mb-3">
               Requested: {inquiry.requestedServiceTitle}
             </h4>
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 text-xs sm:text-sm text-slate-200 leading-relaxed whitespace-pre-wrap">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed whitespace-pre-wrap">
               {inquiry.projectDescription}
             </div>
           </div>
 
           {/* Internal Operations Notes Timeline */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm text-slate-900">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
               <div className="flex items-center gap-2">
-                <MessageSquare className="w-4 h-4 text-emerald-400" />
-                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300 font-mono">
+                <MessageSquare className="w-4 h-4 text-brand-primary" />
+                <h3 className="text-xs font-bold uppercase tracking-wider text-brand-primary font-mono">
                   Internal Operations Notes ({inquiry.internalNotes?.length || 0})
                 </h3>
               </div>
@@ -227,25 +221,25 @@ export default async function SingleInquiryPage({
                 {inquiry.internalNotes.map((note: any, idx: number) => (
                   <div
                     key={idx}
-                    className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 text-xs"
+                    className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800"
                   >
-                    <div className="flex items-center justify-between gap-2 mb-1.5 text-slate-400">
-                      <span className="font-bold text-slate-200 flex items-center gap-1.5">
-                        <User className="w-3 h-3 text-ariiti-accent" />
+                    <div className="flex items-center justify-between gap-2 mb-1.5 text-slate-500">
+                      <span className="font-bold text-slate-900 flex items-center gap-1.5">
+                        <User className="w-3 h-3 text-brand-primary" />
                         <span>{note.authorName}</span>
                       </span>
-                      <span className="font-mono text-[10px] text-slate-500">
+                      <span className="font-mono text-[10px] text-slate-400">
                         {new Date(note.createdAt).toLocaleString()}
                       </span>
                     </div>
-                    <p className="text-slate-300 leading-relaxed whitespace-pre-wrap">
+                    <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">
                       {note.note}
                     </p>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="py-8 text-center text-slate-500 text-xs">
+              <div className="py-8 text-center text-slate-400 text-xs">
                 No internal notes recorded for this inquiry yet. Click &quot;Add Internal Note&quot; to log follow-up milestones.
               </div>
             )}

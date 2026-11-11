@@ -24,15 +24,15 @@ export default async function AdminActivityLogsPage() {
     <div className="space-y-6">
       <div>
         <div className="flex items-center gap-2 mb-1">
-          <History className="w-5 h-5 text-emerald-400" />
-          <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold">
+          <History className="w-5 h-5 text-brand-primary" />
+          <span className="text-xs font-mono uppercase tracking-wider text-brand-primary font-bold">
             Security & Compliance
           </span>
         </div>
-        <h1 className="text-2xl font-black text-white tracking-tight">
+        <h1 className="text-2xl font-black text-brand-primary tracking-tight">
           System Activity Audit Logs
         </h1>
-        <p className="text-xs text-slate-400 mt-0.5">
+        <p className="text-xs text-slate-500 mt-0.5">
           Immutable audit trail capturing all administrative mutations, publishing events, user role adjustments, and status changes.
         </p>
       </div>

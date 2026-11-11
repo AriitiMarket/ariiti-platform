@@ -57,7 +57,7 @@ export default async function EditCaseStudyPage({
     <div className="space-y-6">
       <Link
         href="/admin/case-studies"
-        className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-white transition-colors"
+        className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-primary hover:underline transition-colors"
       >
         <ChevronLeft className="w-4 h-4" />
         <span>Back to Case Studies Directory</span>
@@ -65,15 +65,15 @@ export default async function EditCaseStudyPage({
 
       <div>
         <div className="flex items-center gap-2 mb-1">
-          <Edit3 className="w-4 h-4 text-ariiti-accent" />
-          <span className="text-xs font-mono uppercase tracking-wider text-ariiti-accent font-bold">
+          <Edit3 className="w-4 h-4 text-brand-primary" />
+          <span className="text-xs font-mono uppercase tracking-wider text-brand-primary font-bold">
             CMS Editor
           </span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-black text-brand-primary tracking-tight">
           Edit Case Study: {caseStudy.title}
         </h1>
-        <p className="text-xs sm:text-sm text-slate-400 mt-1">
+        <p className="text-xs sm:text-sm text-slate-600 mt-1">
           Update architectural specifications, equipment lists, outcome metrics, and publication visibility.
         </p>
       </div>

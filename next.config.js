@@ -16,6 +16,10 @@ const nextConfig = {
         hostname: "res.cloudinary.com",
       },
       {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
+      },
+      {
         protocol: "http",
         hostname: "localhost",
       },
@@ -28,3 +32,4 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+

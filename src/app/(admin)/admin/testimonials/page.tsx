@@ -74,15 +74,15 @@ export default async function AdminTestimonialsPage() {
     <div className="space-y-6">
       <div>
         <div className="flex items-center gap-2 mb-1">
-          <MessageSquare className="w-5 h-5 text-ariiti-accent" />
-          <span className="text-xs font-mono uppercase tracking-wider text-ariiti-accent font-bold">
-            Social Proof & Verification
+          <MessageSquare className="w-5 h-5 text-brand-primary" />
+          <span className="text-xs font-mono uppercase tracking-wider text-brand-primary font-bold">
+            Social Proof &amp; Verification
           </span>
         </div>
-        <h1 className="text-2xl font-black text-white tracking-tight">
-          Client Feedback & Verified Testimonials
+        <h1 className="text-2xl sm:text-3xl font-black text-brand-primary tracking-tight">
+          Client Feedback &amp; Verified Testimonials
         </h1>
-        <p className="text-xs text-slate-400 mt-0.5">
+        <p className="text-xs sm:text-sm text-slate-600 mt-0.5">
           Manage authentic commercial reviews, deployment feedback, ratings, and live publication status on the public website.
         </p>
       </div>

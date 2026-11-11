@@ -3,15 +3,11 @@
 import React, { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import {
-  FileText,
   Save,
   Loader2,
   AlertCircle,
   Plus,
   Trash2,
-  CheckCircle2,
-  Shield,
-  ArrowLeft,
 } from "lucide-react";
 import { upsertCaseStudy } from "@/actions/adminCmsActions";
 import { slugify } from "@/lib/utils";
@@ -105,25 +101,26 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
     initialData?.publicationStatus || "PUBLISHED"
   );
   const [isFeatured, setIsFeatured] = useState(
-    initialData?.isFeatured ?? false
+    initialData?.isFeatured || false
   );
   const [displayOrder, setDisplayOrder] = useState(
-    initialData?.displayOrder ?? 0
+    initialData?.displayOrder || 0
   );
 
   const handleTitleChange = (val: string) => {
     setTitle(val);
-    if (!isEditing && !slug) {
+    if (!isEditing) {
       setSlug(slugify(val));
     }
   };
 
   const addTech = () => {
-    const trimmed = techInput.trim();
-    if (trimmed && !technologies.includes(trimmed)) {
-      setTechnologies([...technologies, trimmed]);
-      setTechInput("");
+    if (!techInput.trim()) return;
+    const item = techInput.trim();
+    if (!technologies.includes(item)) {
+      setTechnologies([...technologies, item]);
     }
+    setTechInput("");
   };
 
   const removeTech = (item: string) => {
@@ -141,6 +138,7 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
   };
 
   const removeOutcomeRow = (index: number) => {
+    if (outcomes.length === 1) return;
     setOutcomes(outcomes.filter((_, idx) => idx !== index));
   };
 
@@ -148,25 +146,39 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
     e.preventDefault();
     setError(null);
 
+    if (technologies.length === 0) {
+      setError("Please add at least one technology, tool, or hardware equipment spec.");
+      return;
+    }
+
     const payload = {
-      title,
-      slug: slug || slugify(title),
-      category,
-      projectType,
-      clientSector,
-      clientName: isClientConfidential ? "" : clientName,
+      title: title.trim(),
+      slug: slug.trim(),
+      category: category as
+        | "SOFTWARE_DEVELOPMENT"
+        | "NETWORKING_INFRASTRUCTURE"
+        | "HARDWARE_EQUIPMENT"
+        | "IT_MAINTENANCE_SUPPORT",
+      projectType: projectType as
+        | "CLIENT_DEPLOYMENT"
+        | "INTERNAL_ECOSYSTEM_PRODUCT"
+        | "TECHNICAL_DEMONSTRATION",
+      clientSector: clientSector.trim(),
+      clientName: isClientConfidential ? undefined : clientName.trim(),
       isClientConfidential,
-      location,
-      summary,
-      problemAddressed,
-      solutionImplemented,
+      location: location.trim(),
+      summary: summary.trim(),
+      problemAddressed: problemAddressed.trim(),
+      solutionImplemented: solutionImplemented.trim(),
       technologiesAndEquipment: technologies,
-      measurableOutcomes: outcomes.filter((o) => o.trim().length > 0),
-      coverImageUrl,
-      galleryImageUrls: [coverImageUrl],
-      liveOrDemoUrl: liveOrDemoUrl || undefined,
-      projectStatus,
-      publicationStatus,
+      measurableOutcomes: outcomes.map((o) => o.trim()).filter(Boolean),
+      coverImageUrl: coverImageUrl.trim(),
+      liveOrDemoUrl: liveOrDemoUrl.trim() || undefined,
+      projectStatus: projectStatus as
+        | "COMPLETED"
+        | "ONGOING_SUPPORT"
+        | "PILOT_STAGE",
+      publicationStatus: publicationStatus as "PUBLISHED" | "DRAFT" | "ARCHIVED",
       isFeatured,
       displayOrder: Number(displayOrder),
     };
@@ -185,21 +197,21 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
   return (
     <form onSubmit={handleSubmit} className="space-y-8 max-w-4xl pb-16">
       {error && (
-        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 flex items-start gap-3 text-xs text-red-300">
-          <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+        <div className="p-4 rounded-xl bg-red-50 border border-red-200 flex items-start gap-3 text-xs text-red-700">
+          <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
           <span>{error}</span>
         </div>
       )}
 
-      {/* 1. Core Identification */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-300 font-mono">
+      {/* 1. Core Identification: White background, subtle border */}
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm text-slate-900">
+        <h3 className="text-sm font-bold uppercase tracking-wider text-brand-primary font-mono">
           1. General Case Study Identity
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="md:col-span-2">
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Project Title *
             </label>
             <input
@@ -208,12 +220,12 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
               value={title}
               onChange={(e) => handleTitleChange(e.target.value)}
               placeholder="e.g. Enterprise Multi-Floor Cat6 Structured Cabling & UniFi APs"
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary shadow-xs"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               URL Slug *
             </label>
             <input
@@ -222,34 +234,34 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
               value={slug}
               onChange={(e) => setSlug(slugify(e.target.value))}
               placeholder="enterprise-multifloor-cabling"
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 font-mono focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 font-mono focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary shadow-xs"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Service Category *
             </label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary shadow-xs"
             >
               <option value="SOFTWARE_DEVELOPMENT">Software Development</option>
-              <option value="NETWORKING_INFRASTRUCTURE">Networking & IT Infrastructure</option>
-              <option value="HARDWARE_EQUIPMENT">Hardware & POS Equipment</option>
-              <option value="IT_MAINTENANCE_SUPPORT">IT Maintenance & SLAs</option>
+              <option value="NETWORKING_INFRASTRUCTURE">Networking &amp; IT Infrastructure</option>
+              <option value="HARDWARE_EQUIPMENT">Hardware &amp; POS Equipment</option>
+              <option value="IT_MAINTENANCE_SUPPORT">IT Maintenance &amp; SLAs</option>
             </select>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Project Classification *
             </label>
             <select
               value={projectType}
               onChange={(e) => setProjectType(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary shadow-xs"
             >
               <option value="CLIENT_DEPLOYMENT">Commercial Client Deployment</option>
               <option value="INTERNAL_ECOSYSTEM_PRODUCT">Internal Ecosystem Product</option>
@@ -258,7 +270,7 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Location (City/Region) *
             </label>
             <input
@@ -267,21 +279,21 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Harar, Dire Dawa, Aweday, etc."
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary shadow-xs"
             />
           </div>
         </div>
       </div>
 
       {/* 2. Client Attribution & NDA Privacy */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-300 font-mono">
-          2. Client Attribution & Confidentiality
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm text-slate-900">
+        <h3 className="text-sm font-bold uppercase tracking-wider text-brand-primary font-mono">
+          2. Client Attribution &amp; Confidentiality
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Client Commercial Sector *
             </label>
             <input
@@ -290,12 +302,12 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
               value={clientSector}
               onChange={(e) => setClientSector(e.target.value)}
               placeholder="Retail & Wholesale, Hospitality, Healthcare, etc."
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary shadow-xs"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Client Organization Name
             </label>
             <input
@@ -304,7 +316,7 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
               placeholder={isClientConfidential ? "Hidden by NDA" : "Company Name"}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-ariiti-accent disabled:opacity-40"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary disabled:opacity-40 shadow-xs"
             />
           </div>
 
@@ -314,9 +326,9 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
                 type="checkbox"
                 checked={isClientConfidential}
                 onChange={(e) => setIsClientConfidential(e.target.checked)}
-                className="w-4 h-4 rounded border-slate-700 bg-slate-950 text-ariiti-accent focus:ring-ariiti-accent"
+                className="w-4 h-4 rounded border-slate-300 text-brand-primary focus:ring-brand-primary"
               />
-              <span className="text-xs font-semibold text-slate-200">
+              <span className="text-xs font-semibold text-slate-700">
                 Enforce Client NDA Confidentiality (Renders as &quot;Confidential {clientSector || "Commercial"} Client&quot;)
               </span>
             </label>
@@ -325,13 +337,13 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
       </div>
 
       {/* 3. Narrative & Technical Details */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-300 font-mono">
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm text-slate-900">
+        <h3 className="text-sm font-bold uppercase tracking-wider text-brand-primary font-mono">
           3. Technical Narrative
         </h3>
 
         <div>
-          <label className="block text-xs font-bold text-slate-300 mb-1">
+          <label className="block text-xs font-bold text-brand-primary mb-1">
             Executive Summary * (20 - 300 characters)
           </label>
           <textarea
@@ -340,12 +352,12 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
             value={summary}
             onChange={(e) => setSummary(e.target.value)}
             placeholder="Brief high-level summary of the deployment for the public directory card..."
-            className="w-full p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+            className="w-full p-3 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary shadow-xs"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-bold text-slate-300 mb-1">
+          <label className="block text-xs font-bold text-brand-primary mb-1">
             Problem Addressed * (Min 50 characters)
           </label>
           <textarea
@@ -354,12 +366,12 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
             value={problemAddressed}
             onChange={(e) => setProblemAddressed(e.target.value)}
             placeholder="Describe the operational failure, bottleneck, or network dead spots the business suffered prior to this deployment..."
-            className="w-full p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+            className="w-full p-3 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary shadow-xs"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-bold text-slate-300 mb-1">
+          <label className="block text-xs font-bold text-brand-primary mb-1">
             Solution Implemented * (Min 50 characters)
           </label>
           <textarea
@@ -368,21 +380,21 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
             value={solutionImplemented}
             onChange={(e) => setSolutionImplemented(e.target.value)}
             placeholder="Detail the technical architecture, cabling standard, routing configuration, or software synchronization engine engineered..."
-            className="w-full p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+            className="w-full p-3 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary shadow-xs"
           />
         </div>
       </div>
 
       {/* 4. Equipment & Outcomes */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-300 font-mono">
-          4. Hardware, Stack & Outcomes
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm text-slate-900">
+        <h3 className="text-sm font-bold uppercase tracking-wider text-brand-primary font-mono">
+          4. Hardware, Stack &amp; Outcomes
         </h3>
 
         {/* Technologies tag input */}
         <div>
-          <label className="block text-xs font-bold text-slate-300 mb-1">
-            Technologies, Protocols & Hardware Equipment *
+          <label className="block text-xs font-bold text-brand-primary mb-1">
+            Technologies, Protocols &amp; Hardware Equipment *
           </label>
           <div className="flex gap-2 mb-2">
             <input
@@ -396,12 +408,12 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
                 }
               }}
               placeholder="e.g. Cat6 Solid Copper, MikroTik CCR, UniFi Enterprise APs"
-              className="flex-1 px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="flex-1 px-3.5 py-2 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary shadow-xs"
             />
             <button
               type="button"
               onClick={addTech}
-              className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold"
+              className="px-3.5 py-2 rounded-xl bg-white border border-brand-primary hover:bg-slate-50 text-brand-primary text-xs font-bold shadow-xs"
             >
               Add Item
             </button>
@@ -411,13 +423,13 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
             {technologies.map((item, idx) => (
               <span
                 key={idx}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800 text-slate-200 text-xs font-mono border border-slate-700"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 text-slate-800 text-xs font-mono border border-slate-200"
               >
                 <span>{item}</span>
                 <button
                   type="button"
                   onClick={() => removeTech(item)}
-                  className="text-slate-400 hover:text-red-400"
+                  className="text-slate-400 hover:text-red-600"
                 >
                   ×
                 </button>
@@ -428,7 +440,7 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
 
         {/* Measurable Outcomes */}
         <div>
-          <label className="block text-xs font-bold text-slate-300 mb-1">
+          <label className="block text-xs font-bold text-brand-primary mb-1">
             Measurable Project Outcomes
           </label>
           <div className="space-y-2">
@@ -439,13 +451,13 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
                   value={outcome}
                   onChange={(e) => handleOutcomeChange(idx, e.target.value)}
                   placeholder="e.g. 0-second checkout latency during ISP downtime"
-                  className="flex-1 px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+                  className="flex-1 px-3.5 py-2 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary shadow-xs"
                 />
                 {outcomes.length > 1 && (
                   <button
                     type="button"
                     onClick={() => removeOutcomeRow(idx)}
-                    className="p-2 text-slate-500 hover:text-red-400"
+                    className="p-2 text-slate-400 hover:text-red-600"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -456,7 +468,7 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
           <button
             type="button"
             onClick={addOutcomeRow}
-            className="mt-2 text-xs font-bold text-ariiti-accent hover:text-blue-300 flex items-center gap-1"
+            className="mt-2 text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Add Another Outcome</span>
@@ -465,14 +477,14 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
       </div>
 
       {/* 5. Publishing Controls */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-300 font-mono">
-          5. Media & Publication Controls
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm text-slate-900">
+        <h3 className="text-sm font-bold uppercase tracking-wider text-brand-primary font-mono">
+          5. Media &amp; Publication Controls
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Cover Image URL *
             </label>
             <input
@@ -480,12 +492,12 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
               required
               value={coverImageUrl}
               onChange={(e) => setCoverImageUrl(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 font-mono focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 font-mono focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary shadow-xs"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Live Demo or Access URL (Optional)
             </label>
             <input
@@ -493,18 +505,18 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
               value={liveOrDemoUrl}
               onChange={(e) => setLiveOrDemoUrl(e.target.value)}
               placeholder="https://pos.ariititech.com"
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 font-mono focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 font-mono focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary shadow-xs"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Publication Status *
             </label>
             <select
               value={publicationStatus}
               onChange={(e) => setPublicationStatus(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 focus:outline-none focus:ring-2 focus:ring-ariiti-accent font-bold font-mono"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary font-bold font-mono shadow-xs"
             >
               <option value="PUBLISHED">PUBLISHED (Live on Public Directory)</option>
               <option value="DRAFT">DRAFT (Internal Review Only)</option>
@@ -513,13 +525,13 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-300 mb-1">
+            <label className="block text-xs font-bold text-brand-primary mb-1">
               Project Execution Status
             </label>
             <select
               value={projectStatus}
               onChange={(e) => setProjectStatus(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-100 focus:outline-none focus:ring-2 focus:ring-ariiti-accent"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary shadow-xs"
             >
               <option value="COMPLETED">COMPLETED</option>
               <option value="ONGOING_SUPPORT">ONGOING_SUPPORT</option>
@@ -533,9 +545,9 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
                 type="checkbox"
                 checked={isFeatured}
                 onChange={(e) => setIsFeatured(e.target.checked)}
-                className="w-4 h-4 rounded border-slate-700 bg-slate-950 text-ariiti-accent focus:ring-ariiti-accent"
+                className="w-4 h-4 rounded border-slate-300 text-brand-primary focus:ring-brand-primary"
               />
-              <span className="text-xs font-semibold text-slate-200">
+              <span className="text-xs font-semibold text-slate-700">
                 Feature on Public Homepage
               </span>
             </label>
@@ -543,20 +555,20 @@ export const CaseStudyForm: React.FC<CaseStudyFormProps> = ({
         </div>
       </div>
 
-      {/* Save Action Bar */}
-      <div className="flex items-center justify-between pt-4 border-t border-slate-800">
+      {/* Save Action Bar: Secondary button (Cancel) and Primary button (Save) */}
+      <div className="flex items-center justify-between pt-4 border-t border-slate-200">
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-colors"
+          className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-slate-900 bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"
         >
-          Cancel & Return
+          Cancel &amp; Return
         </button>
 
         <button
           type="submit"
           disabled={isPending}
-          className="px-6 py-2.5 rounded-xl bg-ariiti-accent hover:bg-blue-600 active:bg-blue-700 text-white text-xs font-bold flex items-center gap-2 shadow-lg shadow-blue-600/20 disabled:opacity-50"
+          className="px-6 py-2.5 rounded-xl bg-brand-primary hover:bg-brand-primary-hover active:bg-[#061e35] text-white text-xs font-bold flex items-center gap-2 shadow-sm disabled:opacity-50"
         >
           {isPending ? (
             <>

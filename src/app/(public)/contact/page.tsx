@@ -65,17 +65,17 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
 
   return (
     <div className="pb-24 space-y-12">
-      {/* 1. Header Section */}
-      <section className="bg-white border-b border-slate-200/80 pt-12 pb-16 sm:pb-20">
+      {/* 1. Hero Section (Deep Navy Blue with White Headings & Text) */}
+      <section className="bg-brand-primary text-white border-b border-[#0d3f6d] pt-12 pb-16 sm:pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <span className="text-xs font-bold uppercase tracking-wider text-ariiti-accent block mb-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-white/80 block mb-2">
               Direct Technical Engagement
             </span>
-            <h1 className="text-3xl sm:text-5xl font-black text-ariiti-navy tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
               Request a Service or Schedule a Consultation.
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-ariiti-muted leading-relaxed">
+            <p className="mt-4 text-base sm:text-lg text-white/85 leading-relaxed">
               Whether you need turnkey structured cabling for a commercial property, a resilient offline POS system, or a prioritized maintenance contract, our operations team in Harar and Dire Dawa is ready to assist.
             </p>
           </div>

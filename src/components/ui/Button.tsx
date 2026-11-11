@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "accent" | "outline" | "ghost";
+  variant?: "primary" | "secondary" | "accent" | "outline" | "ghost";
   size?: "sm" | "md" | "lg";
   href?: string;
   target?: string;
@@ -33,14 +33,18 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   const variantStyles = {
+    // Official Primary: Deep Navy Blue background with white text
     primary:
-      "bg-ariiti-navy text-white hover:bg-ariiti-navy/90 active:bg-ariiti-navy/95 focus-visible:ring-ariiti-navy shadow-sm",
+      "bg-brand-primary text-white hover:bg-brand-primary-hover active:bg-[#051c33] focus-visible:ring-brand-primary shadow-sm",
+    // Official Secondary: White background with deep navy blue text and border
+    secondary:
+      "bg-white border-2 border-brand-primary text-brand-primary hover:bg-slate-50 active:bg-slate-100 focus-visible:ring-brand-primary shadow-sm",
     accent:
-      "bg-ariiti-accent text-white hover:bg-ariiti-accent/90 active:bg-ariiti-accent/95 focus-visible:ring-ariiti-accent shadow-sm",
+      "bg-brand-primary text-white hover:bg-brand-primary-hover active:bg-[#051c33] focus-visible:ring-brand-primary shadow-sm",
     outline:
-      "border-2 border-ariiti-navy text-ariiti-navy hover:bg-ariiti-navy hover:text-white active:bg-ariiti-navy/90 focus-visible:ring-ariiti-navy",
+      "bg-white border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white active:bg-brand-primary-hover focus-visible:ring-brand-primary shadow-sm",
     ghost:
-      "text-ariiti-navy hover:bg-ariiti-navy/5 active:bg-ariiti-navy/10 focus-visible:ring-ariiti-navy",
+      "text-brand-primary hover:bg-brand-primary/5 active:bg-brand-primary/10 focus-visible:ring-brand-primary",
   };
 
   const combinedClasses = cn(
@@ -51,13 +55,18 @@ export const Button: React.FC<ButtonProps> = ({
   );
 
   if (href) {
-    const isExternal = href.startsWith("http") || href.startsWith("tel:") || href.startsWith("mailto:");
+    const isExternal =
+      href.startsWith("http") ||
+      href.startsWith("tel:") ||
+      href.startsWith("mailto:");
     if (isExternal) {
       return (
         <a
           href={href}
           target={target || (href.startsWith("http") ? "_blank" : undefined)}
-          rel={rel || (href.startsWith("http") ? "noopener noreferrer" : undefined)}
+          rel={
+            rel || (href.startsWith("http") ? "noopener noreferrer" : undefined)
+          }
           className={combinedClasses}
         >
           {children}

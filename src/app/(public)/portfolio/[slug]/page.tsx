@@ -70,13 +70,13 @@ export default async function SingleCaseStudyPage({
 
   return (
     <div className="pb-24 space-y-12">
-      {/* 1. Header Banner */}
-      <section className="bg-white border-b border-slate-200/80 pt-12 pb-16 sm:pb-20">
+      {/* 1. Header Hero Banner (Deep Navy Blue with White Headings & Text) */}
+      <section className="bg-brand-primary text-white border-b border-[#0d3f6d] pt-12 pb-16 sm:pb-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb Back Link */}
           <Link
             href="/portfolio"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-ariiti-navy mb-6 transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-white/80 hover:text-white mb-6 transition-colors"
           >
             <ChevronLeft className="w-4 h-4" />
             <span>Back to All Case Studies</span>
@@ -84,48 +84,48 @@ export default async function SingleCaseStudyPage({
 
           <div className="space-y-4">
             <div className="flex flex-wrap items-center gap-2.5">
-              <Badge variant="development" withDot={false}>
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-white/20 text-white border border-white/30 uppercase tracking-wide">
                 {categoryName}
-              </Badge>
-              <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+              </span>
+              <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/10 text-white border border-white/20">
                 {caseStudy.projectStatus.replace(/_/g, " ")}
               </span>
-              <span className="text-xs font-medium text-slate-500 flex items-center gap-1">
-                <MapPin className="w-3.5 h-3.5 text-ariiti-accent" />
+              <span className="text-xs font-medium text-white/85 flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 text-white/80" />
                 {caseStudy.location}
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-black text-ariiti-navy tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
               {caseStudy.title}
             </h1>
 
-            <p className="text-base sm:text-xl text-ariiti-muted leading-relaxed max-w-3xl">
+            <p className="text-base sm:text-xl text-white/85 leading-relaxed max-w-3xl">
               {caseStudy.summary}
             </p>
 
             {/* Client NDA Meta Bar */}
-            <div className="pt-2 flex flex-wrap items-center gap-6 text-xs text-slate-600 border-t border-slate-100">
+            <div className="pt-2 flex flex-wrap items-center gap-6 text-xs text-white/80 border-t border-white/15">
               <div className="flex items-center gap-1.5">
                 {caseStudy.isClientConfidential ? (
                   <>
-                    <Shield className="w-4 h-4 text-amber-500" />
+                    <Shield className="w-4 h-4 text-emerald-400" />
                     <span>
-                      Client: <strong>{clientDisplayName}</strong> (Protected by NDA)
+                      Client: <strong className="text-white">{clientDisplayName}</strong> (Protected by NDA)
                     </span>
                   </>
                 ) : (
                   <>
-                    <Building className="w-4 h-4 text-slate-400" />
+                    <Building className="w-4 h-4 text-white/70" />
                     <span>
-                      Client: <strong>{clientDisplayName}</strong>
+                      Client: <strong className="text-white">{clientDisplayName}</strong>
                     </span>
                   </>
                 )}
               </div>
 
               <div>
-                Sector: <strong>{caseStudy.clientSector}</strong>
+                Sector: <strong className="text-white">{caseStudy.clientSector}</strong>
               </div>
 
               {caseStudy.completedAt && (

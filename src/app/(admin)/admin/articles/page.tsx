@@ -32,15 +32,15 @@ export default async function AdminArticlesPage() {
     <div className="space-y-6">
       <div>
         <div className="flex items-center gap-2 mb-1">
-          <FileText className="w-5 h-5 text-ariiti-accent" />
-          <span className="text-xs font-mono uppercase tracking-wider text-ariiti-accent font-bold">
+          <FileText className="w-5 h-5 text-brand-primary" />
+          <span className="text-xs font-mono uppercase tracking-wider text-brand-primary font-bold">
             Editorial Publications
           </span>
         </div>
-        <h1 className="text-2xl font-black text-white tracking-tight">
-          Articles, Engineering Insights & News
+        <h1 className="text-2xl sm:text-3xl font-black text-brand-primary tracking-tight">
+          Articles, Engineering Insights &amp; News
         </h1>
-        <p className="text-xs text-slate-400 mt-0.5">
+        <p className="text-xs sm:text-sm text-slate-600 mt-0.5">
           Publish engineering blog posts, technical architecture breakdowns, and official company announcements.
         </p>
       </div>

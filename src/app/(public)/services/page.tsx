@@ -28,36 +28,36 @@ export const revalidate = 60;
 
 const CATEGORIES = [
   {
-    id: "software",
+    id: "software-development",
     key: "SOFTWARE_DEVELOPMENT",
-    title: "Software Development & Business Systems",
+    title: "Software Development",
     icon: Code2,
     description:
-      "Bespoke enterprise web portals, offline-first cashier systems, and automated databases engineered for high transaction speed and regional telecom resilience.",
+      "Web applications, mobile applications, business management systems, and custom software solutions engineered for high performance and regional resilience.",
   },
   {
-    id: "networking",
+    id: "networking-infrastructure",
     key: "NETWORKING_INFRASTRUCTURE",
-    title: "Commercial Networking & Structured Infrastructure",
+    title: "Networking & IT Infrastructure",
     icon: Network,
     description:
-      "Turnkey Cat6 structured cabling, organized server rack installations, MikroTik routing, and high-density commercial Wi-Fi for multi-floor hotels and offices.",
+      "LAN and Wi-Fi installation, router and switch configuration, structured network cabling, and comprehensive network troubleshooting.",
   },
   {
-    id: "hardware",
+    id: "hardware-support",
     key: "HARDWARE_EQUIPMENT",
-    title: "POS Hardware & Peripheral Equipment Integration",
+    title: "Hardware & Technical Support",
     icon: Cpu,
     description:
-      "High-speed 80mm thermal receipt printers, omnidirectional 1D/2D barcode scanners, rugged touch terminals, and surge-protected cash drawers.",
+      "Computer setup and maintenance, receipt printer and peripheral setup, UPS and hardware installation, and dedicated on-site technical troubleshooting.",
   },
   {
-    id: "maintenance",
+    id: "business-technology",
     key: "IT_MAINTENANCE_SUPPORT",
-    title: "Preventive IT Maintenance & SLA Technical Support",
+    title: "Business Technology Solutions",
     icon: ShieldCheck,
     description:
-      "Proactive hardware de-dusting, validated daily cloud and NAS backups, operating system optimization, and prioritized 2-to-4 hour emergency on-site dispatch.",
+      "POS and billing systems, inventory and sales management, business process digitization, and enterprise technology integration.",
   },
 ];
 

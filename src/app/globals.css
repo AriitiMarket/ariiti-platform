@@ -3,14 +3,34 @@
 @tailwind utilities;
 
 :root {
+  /* Official Ariiti Tech Brand Colors */
+  --brand-primary: #093053;
+  --brand-primary-rgb: 9, 48, 83;
+  --brand-primary-hover: #07243e;
+  --brand-secondary: #FFFFFF;
+  --brand-secondary-rgb: 255, 255, 255;
+
+  /* Semantic UI Tokens derived from Brand Guidelines */
+  --brand-surface: #FFFFFF;
+  --brand-surface-subtle: #F5F7FA;
+  --brand-border: #E2E8F0;
+  --brand-text-primary: #093053;
+  --brand-text-body: #1E293B;
+  --brand-text-muted: #475569;
+
   --font-inter: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 body {
-  color: #141414;
-  background-color: #F8FAFC;
+  color: var(--brand-text-body);
+  background-color: var(--brand-secondary);
   font-family: var(--font-inter);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Base link styling */
+a {
+  transition: color 150ms ease, opacity 150ms ease;
 }
 
 /* Custom scrollbar and utilities for clean corporate aesthetics */

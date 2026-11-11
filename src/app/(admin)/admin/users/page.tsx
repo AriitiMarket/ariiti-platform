@@ -32,15 +32,15 @@ export default async function AdminUsersPage() {
     <div className="space-y-6">
       <div>
         <div className="flex items-center gap-2 mb-1">
-          <ShieldCheck className="w-5 h-5 text-purple-400" />
-          <span className="text-xs font-mono uppercase tracking-wider text-purple-400 font-bold">
+          <ShieldCheck className="w-5 h-5 text-brand-primary" />
+          <span className="text-xs font-mono uppercase tracking-wider text-brand-primary font-bold">
             Access Control & RBAC
           </span>
         </div>
-        <h1 className="text-2xl font-black text-white tracking-tight">
+        <h1 className="text-2xl font-black text-brand-primary tracking-tight">
           Administrator Accounts & Roles
         </h1>
-        <p className="text-xs text-slate-400 mt-0.5">
+        <p className="text-xs text-slate-500 mt-0.5">
           Manage system administrators, assign granular roles (SUPER_ADMIN, CONTENT_MANAGER, OPERATIONS), and manage account activations.
         </p>
       </div>

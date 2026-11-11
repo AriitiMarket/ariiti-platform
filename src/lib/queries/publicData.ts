@@ -130,6 +130,27 @@ export async function getPublishedProducts(
 }
 
 /**
+ * Fetches a single published product by its URL slug.
+ */
+export async function getProductBySlug(
+  slug: string
+): Promise<IProduct | null> {
+  try {
+    await connectDB();
+    const doc = await Product.findOne({
+      slug: slug.toLowerCase().trim(),
+      isPublished: true,
+    }).lean();
+
+    if (!doc) return null;
+    return serialize<IProduct>(doc);
+  } catch (error) {
+    console.error("[QUERY ERROR] getProductBySlug failed:", error);
+    return null;
+  }
+}
+
+/**
  * Fetches published B2B case studies and deployments, strictly enforcing
  * NDA confidentiality masking for public visitors.
  */
@@ -234,7 +255,7 @@ To overcome this, Ariiti Tech engineered a local-first browser client architectu
     readTime: "4 min read",
     isPublished: true,
     publishedAt: new Date("2026-03-01"),
-    coverImageUrl: "https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=1200&q=80",
+    coverImageUrl: "https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "Why Cat6 Structured Cabling Outperforms Mesh Wi-Fi in Commercial Buildings",

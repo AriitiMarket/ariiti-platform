@@ -1,16 +1,15 @@
 import React from "react";
 import Link from "next/link";
 import { IWebsiteSettings } from "@/models/WebsiteSettings";
+import AriitiLogo from "@/components/ui/AriitiLogo";
 import {
   Phone,
   Mail,
   MapPin,
   MessageCircle,
-  ExternalLink,
   Shield,
   ArrowUpRight,
   Send,
-  Clock,
 } from "lucide-react";
 
 const LinkedInIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
@@ -27,44 +26,36 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-950 text-slate-300 pt-16 pb-12 border-t border-slate-800">
+    <footer className="bg-brand-primary text-white pt-16 pb-12 border-t border-[#0d3f6d]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-10">
-          {/* Col 1 & 2: Brand, Organizational Mission & Hubs */}
+          {/* Col 1 & 2: Official Brand, Mission & Hubs */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-ariiti-navy flex items-center justify-center text-white font-black text-xl shadow-md border border-slate-700">
-                A
-              </div>
-              <div>
-                <span className="text-xl font-black text-white tracking-tight block">
-                  {settings.companyName || "ARIITI TECH"}
-                </span>
-                <span className="text-[10px] tracking-widest uppercase text-ariiti-accent font-bold">
-                  Eastern Ethiopia Infrastructure
-                </span>
-              </div>
-            </div>
+            <AriitiLogo
+              variant="light"
+              size="md"
+              subtitle="Eastern Ethiopia Infrastructure"
+            />
 
-            <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
+            <p className="text-sm text-white/85 leading-relaxed max-w-sm pt-2">
               {settings.tagline ||
                 "Building reliable enterprise technology, commercial networking, and offline-first software solutions tailored to Eastern Ethiopia."}
             </p>
 
-            <div className="pt-2 text-xs text-slate-400 space-y-2">
-              <p className="font-bold text-slate-200 uppercase tracking-wider text-[11px]">
+            <div className="pt-2 text-xs text-white/85 space-y-2">
+              <p className="font-bold text-white uppercase tracking-wider text-[11px]">
                 On-The-Ground Operations Hubs:
               </p>
               <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-ariiti-accent shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-white/90 shrink-0 mt-0.5" />
                 <span>
-                  <strong>Harar:</strong> Kebele 14 Commercial Corridor
+                  <strong className="text-white">Harar:</strong> Kebele 14 Commercial Corridor
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-white/90 shrink-0 mt-0.5" />
                 <span>
-                  <strong>Dire Dawa:</strong> Kezira Commercial District
+                  <strong className="text-white">Dire Dawa:</strong> Kezira Commercial District
                 </span>
               </div>
             </div>
@@ -73,13 +64,13 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
           {/* Col 3: Solutions & Services */}
           <div>
             <h3 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
-              Solutions & Services
+              Solutions &amp; Services
             </h3>
-            <ul className="space-y-2.5 text-xs text-slate-400">
+            <ul className="space-y-2.5 text-xs text-white/80">
               <li>
                 <Link
                   href="/services#software"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white hover:underline transition-colors"
                 >
                   Custom Software Development
                 </Link>
@@ -87,23 +78,23 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
               <li>
                 <Link
                   href="/services#networking"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white hover:underline transition-colors"
                 >
-                  Commercial Cat6 & Fiber LAN
+                  Commercial Cat6 &amp; Fiber LAN
                 </Link>
               </li>
               <li>
                 <Link
                   href="/services#hardware"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white hover:underline transition-colors"
                 >
-                  POS Hardware & Touch Terminals
+                  POS Hardware &amp; Touch Terminals
                 </Link>
               </li>
               <li>
                 <Link
                   href="/services#maintenance"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white hover:underline transition-colors"
                 >
                   Preventive IT Maintenance SLAs
                 </Link>
@@ -111,7 +102,7 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
               <li>
                 <Link
                   href="/services"
-                  className="text-ariiti-accent font-semibold hover:underline inline-flex items-center gap-1 pt-1"
+                  className="text-white font-bold hover:underline inline-flex items-center gap-1 pt-1"
                 >
                   <span>All Engineering Services</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -123,13 +114,13 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
           {/* Col 4: Ecosystem & Company */}
           <div>
             <h3 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
-              Ecosystem & Company
+              Ecosystem &amp; Company
             </h3>
-            <ul className="space-y-2.5 text-xs text-slate-400">
+            <ul className="space-y-2.5 text-xs text-white/80">
               <li>
                 <Link
                   href="/about"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white hover:underline transition-colors"
                 >
                   About Ariiti Tech
                 </Link>
@@ -137,7 +128,7 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
               <li>
                 <Link
                   href="/products"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white hover:underline transition-colors"
                 >
                   Proprietary Software Products
                 </Link>
@@ -145,7 +136,7 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
               <li>
                 <Link
                   href="/portfolio"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white hover:underline transition-colors"
                 >
                   Verified Case Studies
                 </Link>
@@ -153,7 +144,7 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
               <li>
                 <Link
                   href="/team"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white hover:underline transition-colors"
                 >
                   Engineering Team
                 </Link>
@@ -161,15 +152,15 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
               <li>
                 <Link
                   href="/blog"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white hover:underline transition-colors"
                 >
-                  Technical Articles & News
+                  Technical Articles &amp; News
                 </Link>
               </li>
               <li>
                 <Link
                   href="/contact"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white hover:underline transition-colors"
                 >
                   Request a Consultation
                 </Link>
@@ -177,7 +168,7 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
               <li>
                 <Link
                   href="/admin/login"
-                  className="text-slate-500 hover:text-slate-400 transition-colors inline-block pt-1"
+                  className="text-white/60 hover:text-white transition-colors inline-block pt-1"
                 >
                   Staff Portal
                 </Link>
@@ -190,20 +181,20 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
             <h3 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
               Direct Contact
             </h3>
-            <ul className="space-y-3 text-xs text-slate-400">
+            <ul className="space-y-3 text-xs text-white/80">
               <li className="flex items-start gap-2.5">
                 <Phone className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                 <div className="flex flex-col font-mono">
                   <a
                     href={`tel:${settings.primaryPhone}`}
-                    className="hover:text-white transition-colors font-bold text-slate-200"
+                    className="hover:text-white transition-colors font-bold text-white"
                   >
                     {settings.primaryPhone}
                   </a>
                   {settings.secondaryPhone && (
                     <a
                       href={`tel:${settings.secondaryPhone}`}
-                      className="hover:text-white transition-colors text-slate-400 text-[11px]"
+                      className="hover:text-white transition-colors text-white/70 text-[11px]"
                     >
                       {settings.secondaryPhone}
                     </a>
@@ -211,7 +202,7 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
                 </div>
               </li>
               <li className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-ariiti-accent shrink-0" />
+                <Mail className="w-4 h-4 text-white/80 shrink-0" />
                 <a
                   href={`mailto:${settings.businessEmail}`}
                   className="hover:text-white transition-colors break-all"
@@ -225,7 +216,7 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
                   href={`https://wa.me/${(settings.whatsappNumber || "").replace(/[^0-9]/g, "")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-emerald-300 transition-colors font-semibold text-emerald-400"
+                  className="hover:text-white transition-colors font-semibold text-emerald-300"
                 >
                   Chat on WhatsApp Directly
                 </a>
@@ -233,7 +224,7 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
 
               {/* Social Channels */}
               <li className="pt-2">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-white/60 block mb-2">
                   Official Channels:
                 </span>
                 <div className="flex items-center gap-2">
@@ -242,7 +233,7 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
                       href={settings.socialLinks.telegram}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-ariiti-accent transition-colors"
+                      className="w-8 h-8 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-brand-primary transition-colors"
                       aria-label="Telegram"
                     >
                       <Send className="w-3.5 h-3.5" />
@@ -253,7 +244,7 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
                       href={settings.socialLinks.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-ariiti-accent transition-colors"
+                      className="w-8 h-8 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-brand-primary transition-colors"
                       aria-label="LinkedIn"
                     >
                       <LinkedInIcon className="w-3.5 h-3.5" />
@@ -266,13 +257,13 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
         </div>
 
         {/* Bottom divider and copyright */}
-        <div className="mt-12 pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 text-center sm:text-left">
+        <div className="mt-12 pt-8 border-t border-[#0d3f6d] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/70 text-center sm:text-left">
           <p>
             &copy; {currentYear} {settings.companyName || "Ariiti Tech"}. All rights
-            reserved. Harar & Dire Dawa, Eastern Ethiopia.
+            reserved. Harar &amp; Dire Dawa, Eastern Ethiopia.
           </p>
           <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5 text-slate-400 font-medium">
+            <span className="flex items-center gap-1.5 text-white/80 font-medium">
               <Shield className="w-3.5 h-3.5 text-emerald-400" />
               <span>Contractual 2-Hour Emergency SLA Dispatch</span>
             </span>

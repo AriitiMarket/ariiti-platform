@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const viewport: Viewport = {
-  themeColor: "#20305C",
+  themeColor: "#093053",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -58,7 +58,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className="min-h-screen flex flex-col bg-ariiti-light text-ariiti-dark antialiased"
+        className="min-h-screen flex flex-col bg-brand-secondary text-brand-text-body antialiased"
         suppressHydrationWarning={true}
       >
         {children}

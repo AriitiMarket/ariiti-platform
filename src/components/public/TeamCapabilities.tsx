@@ -13,21 +13,23 @@ import {
   Users2,
 } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
+import connectDB from "@/lib/mongodb";
+import TeamSquad from "@/models/TeamSquad";
 
-interface OperationalUnit {
+export interface OperationalUnit {
   id: string;
   unitName: string;
   designation: string;
   specialization: string;
-  overview: string;
+  overview?: string;
   dispatchHubs: string;
   keyCompetencies: string[];
   imageUrl: string;
-  ctaText: string;
-  ctaHref: string;
+  ctaText?: string;
+  ctaHref?: string;
 }
 
-const OPERATIONAL_UNITS: OperationalUnit[] = [
+const FALLBACK_UNITS: OperationalUnit[] = [
   {
     id: "pos-unit",
     unitName: "Ariiti POS & Commerce Engineering Unit",
@@ -84,9 +86,47 @@ const OPERATIONAL_UNITS: OperationalUnit[] = [
   },
 ];
 
-export const TeamCapabilities: React.FC = () => {
+interface TeamCapabilitiesProps {
+  squads?: OperationalUnit[];
+}
+
+export const TeamCapabilities: React.FC<TeamCapabilitiesProps> = async ({
+  squads: propSquads,
+}) => {
+  let units: OperationalUnit[] = propSquads || [];
+
+  if (!units || units.length === 0) {
+    try {
+      await connectDB();
+      const dbSquads = await TeamSquad.find({ isActive: true })
+        .sort({ order: 1, createdAt: -1 })
+        .lean();
+
+      if (dbSquads && dbSquads.length > 0) {
+        units = dbSquads.map((s: any) => ({
+          id: s._id.toString(),
+          unitName: s.unitName,
+          designation: s.designation,
+          specialization: s.specialization,
+          overview: s.overview || "",
+          dispatchHubs: s.dispatchHubs,
+          keyCompetencies: s.keyCompetencies || [],
+          imageUrl: s.imageUrl || "https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=800&q=80",
+          ctaText: s.ctaText || "Inquire on Engineering",
+          ctaHref: s.ctaHref || "/contact",
+        }));
+      }
+    } catch {
+      units = FALLBACK_UNITS;
+    }
+  }
+
+  if (units.length === 0) {
+    units = FALLBACK_UNITS;
+  }
+
   return (
-    <section className="bg-white py-16 border-y border-slate-200/80">
+    <section className="bg-white py-16 border-y border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="Dedicated Technical Units"
@@ -96,47 +136,49 @@ export const TeamCapabilities: React.FC = () => {
           className="mb-12"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {OPERATIONAL_UNITS.map((unit) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {units.map((unit) => (
             <div
               key={unit.id}
-              className="flex flex-col bg-slate-50/70 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 overflow-hidden text-left group"
+              className="flex flex-col bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-md hover:border-slate-300 transition-all duration-200 overflow-hidden text-left group justify-between"
             >
-              {/* Unit Cover Image */}
-              <div className="relative h-48 w-full bg-slate-900 overflow-hidden">
-                <Image
-                  src={unit.imageUrl}
-                  alt={unit.unitName}
-                  fill
-                  className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+              <div>
+                {/* Unit Cover Image */}
+                <div className="relative h-48 w-full bg-[#093053] overflow-hidden">
+                  <Image
+                    src={unit.imageUrl}
+                    alt={unit.unitName}
+                    fill
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#093053]/90 via-[#093053]/30 to-transparent" />
 
-                {/* Floating Unit Tag */}
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-white">
-                  <span className="font-bold text-[11px] bg-ariiti-navy/80 px-2.5 py-1 rounded border border-white/20 backdrop-blur-sm truncate">
-                    {unit.designation}
-                  </span>
+                  {/* Floating Unit Tag */}
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-white">
+                    <span className="font-bold text-[11px] bg-[#093053]/90 px-2.5 py-1 rounded border border-white/20 backdrop-blur-sm truncate">
+                      {unit.designation}
+                    </span>
+                  </div>
                 </div>
-              </div>
 
-              {/* Unit Content */}
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-lg font-bold text-ariiti-navy mb-1 tracking-tight">
+                {/* Unit Content */}
+                <div className="p-6">
+                  <h3 className="text-lg font-bold text-brand-primary mb-1 tracking-tight">
                     {unit.unitName}
                   </h3>
-                  <p className="text-xs font-semibold text-ariiti-accent mb-3">
+                  <p className="text-xs font-semibold text-brand-primary mb-3">
                     {unit.specialization}
                   </p>
-                  <p className="text-xs text-slate-600 leading-relaxed mb-4">
-                    {unit.overview}
-                  </p>
+                  {unit.overview && (
+                    <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                      {unit.overview}
+                    </p>
+                  )}
 
                   {/* Location badge */}
-                  <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-4 bg-white p-2 rounded-lg border border-slate-200/80">
-                    <MapPin className="w-3.5 h-3.5 text-ariiti-accent shrink-0" />
+                  <div className="flex items-center gap-1.5 text-xs text-slate-600 mb-4 bg-slate-50 p-2 rounded-lg border border-slate-200">
+                    <MapPin className="w-3.5 h-3.5 text-brand-primary shrink-0" />
                     <span className="font-medium text-[11px] truncate">
                       {unit.dispatchHubs}
                     </span>
@@ -152,13 +194,15 @@ export const TeamCapabilities: React.FC = () => {
                     ))}
                   </div>
                 </div>
+              </div>
 
-                {/* Card CTA */}
+              {/* Card CTA */}
+              <div className="p-6 pt-0">
                 <Link
-                  href={unit.ctaHref}
-                  className="inline-flex items-center justify-center gap-1.5 w-full py-2.5 px-4 rounded-xl bg-white border border-slate-300 text-ariiti-navy hover:bg-ariiti-navy hover:text-white hover:border-ariiti-navy text-xs font-bold transition-all duration-150"
+                  href={unit.ctaHref || "/contact"}
+                  className="inline-flex items-center justify-center gap-1.5 w-full py-2.5 px-4 rounded-xl bg-white border border-slate-200 text-brand-primary hover:bg-slate-50 text-xs font-bold transition-all shadow-xs"
                 >
-                  <span>{unit.ctaText}</span>
+                  <span>{unit.ctaText || "Inquire on Engineering"}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>

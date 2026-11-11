@@ -65,13 +65,13 @@ export default async function SingleServicePage({ params }: ServicePageProps) {
 
   return (
     <div className="pb-24 space-y-12">
-      {/* 1. Service Hero Header */}
-      <section className="bg-white border-b border-slate-200/80 pt-12 pb-16 sm:pb-20">
+      {/* 1. Service Hero Header (Deep Navy Blue with White Headings & Text) */}
+      <section className="bg-brand-primary text-white border-b border-[#0d3f6d] pt-12 pb-16 sm:pb-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb Back Link */}
           <Link
             href="/services"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-ariiti-navy mb-6 transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-white/80 hover:text-white mb-6 transition-colors"
           >
             <ChevronLeft className="w-4 h-4" />
             <span>Back to All Services</span>
@@ -79,19 +79,19 @@ export default async function SingleServicePage({ params }: ServicePageProps) {
 
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <Badge variant="development" withDot={false}>
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-white/20 text-white border border-white/30 uppercase tracking-wide">
                 {categoryName}
-              </Badge>
-              <span className="text-xs font-semibold text-slate-400">
-                Guaranteed Regional Warranty & Support
+              </span>
+              <span className="text-xs font-semibold text-white/80">
+                Guaranteed Regional Warranty &amp; Support
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-black text-ariiti-navy tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
               {service.title}
             </h1>
 
-            <p className="text-base sm:text-xl text-ariiti-muted leading-relaxed max-w-3xl">
+            <p className="text-base sm:text-xl text-white/85 leading-relaxed max-w-3xl">
               {service.summary}
             </p>
 
@@ -99,7 +99,7 @@ export default async function SingleServicePage({ params }: ServicePageProps) {
             <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <Button
                 href={`/contact?category=${service.category}&service=${service.slug}`}
-                variant="primary"
+                variant="secondary"
                 size="lg"
               >
                 <span>Request This Service</span>

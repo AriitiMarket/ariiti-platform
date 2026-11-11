@@ -28,15 +28,15 @@ export default async function AdminServicesPage() {
     <div className="space-y-6">
       <div>
         <div className="flex items-center gap-2 mb-1">
-          <Wrench className="w-5 h-5 text-ariiti-accent" />
-          <span className="text-xs font-mono uppercase tracking-wider text-ariiti-accent font-bold">
+          <Wrench className="w-5 h-5 text-brand-primary" />
+          <span className="text-xs font-mono uppercase tracking-wider text-brand-primary font-bold">
             Catalog Management
           </span>
         </div>
-        <h1 className="text-2xl font-black text-white tracking-tight">
+        <h1 className="text-2xl font-black text-brand-primary tracking-tight">
           Enterprise Services Directory
         </h1>
-        <p className="text-xs text-slate-400 mt-0.5">
+        <p className="text-xs sm:text-sm text-slate-600 mt-0.5">
           Manage the public catalog of software engineering, networking infrastructure, POS hardware, and SLA maintenance offerings.
         </p>
       </div>

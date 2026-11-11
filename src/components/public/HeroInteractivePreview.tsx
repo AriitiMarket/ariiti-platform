@@ -94,9 +94,9 @@ export const HeroInteractivePreview: React.FC = () => {
   const current = TABS.find((t) => t.id === activeTab) || TABS[0];
 
   return (
-    <div className="w-full bg-slate-900 text-white rounded-2xl border border-slate-800 shadow-2xl overflow-hidden text-left">
+    <div className="w-full bg-[#072440] text-white rounded-2xl border border-white/20 shadow-2xl overflow-hidden text-left">
       {/* Top Interactive Tabs Bar */}
-      <div className="flex border-b border-slate-800/80 bg-slate-950/60 p-1.5 gap-1 overflow-x-auto">
+      <div className="flex border-b border-white/10 bg-[#051c33] p-1.5 gap-1 overflow-x-auto">
         {TABS.map((tab) => {
           const isActive = tab.id === activeTab;
           return (
@@ -106,13 +106,13 @@ export const HeroInteractivePreview: React.FC = () => {
               onClick={() => setActiveTab(tab.id)}
               className={`flex-1 min-w-[120px] px-3 py-2 rounded-xl text-xs font-bold transition-all duration-150 flex items-center justify-center gap-2 ${
                 isActive
-                  ? "bg-ariiti-navy text-white shadow-md border border-slate-700/80"
-                  : "text-slate-400 hover:text-white hover:bg-slate-800/50"
+                  ? "bg-white text-brand-primary shadow-md"
+                  : "text-white/70 hover:text-white hover:bg-white/10"
               }`}
             >
-              {tab.id === "pos" && <HardDrive className="w-3.5 h-3.5 text-blue-400" />}
-              {tab.id === "networking" && <Wifi className="w-3.5 h-3.5 text-emerald-400" />}
-              {tab.id === "sla" && <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />}
+              {tab.id === "pos" && <HardDrive className="w-3.5 h-3.5" />}
+              {tab.id === "networking" && <Wifi className="w-3.5 h-3.5" />}
+              {tab.id === "sla" && <ShieldCheck className="w-3.5 h-3.5" />}
               <span className="truncate">{tab.label}</span>
             </button>
           );
@@ -124,22 +124,22 @@ export const HeroInteractivePreview: React.FC = () => {
         {/* Header with Live Status Tag */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] font-bold">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-[11px] font-bold">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
               <span>LIVE PREVIEW</span>
             </span>
-            <span className="text-xs text-slate-400 font-mono tracking-wide">
+            <span className="text-xs text-white/70 font-mono tracking-wide">
               {current.badge}
             </span>
           </div>
 
-          <span className="text-[11px] text-slate-500 font-mono">
+          <span className="text-[11px] text-white/60 font-mono">
             ENGINEERED FOR HARAR & DIRE DAWA
           </span>
         </div>
 
         {/* Feature Title */}
-        <h4 className="text-base sm:text-lg font-bold text-slate-100 tracking-tight leading-snug">
+        <h4 className="text-base sm:text-lg font-bold text-white tracking-tight leading-snug">
           {current.title}
         </h4>
 
@@ -148,19 +148,19 @@ export const HeroInteractivePreview: React.FC = () => {
           {current.metrics.map((m, idx) => (
             <div
               key={idx}
-              className="bg-slate-800/70 border border-slate-700/60 rounded-xl p-2.5 sm:p-3 text-center"
+              className="bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 text-center"
             >
               <div className="flex items-baseline justify-center gap-0.5">
                 <span className="text-xl sm:text-2xl font-black text-white font-mono">
                   {m.value}
                 </span>
                 {m.unit && (
-                  <span className="text-xs text-ariiti-accent font-bold font-mono">
+                  <span className="text-xs text-white/90 font-bold font-mono">
                     {m.unit}
                   </span>
                 )}
               </div>
-              <p className="text-[10px] sm:text-[11px] text-slate-400 font-medium truncate mt-0.5">
+              <p className="text-[10px] sm:text-[11px] text-white/70 font-medium truncate mt-0.5">
                 {m.label}
               </p>
             </div>
@@ -168,18 +168,18 @@ export const HeroInteractivePreview: React.FC = () => {
         </div>
 
         {/* Architectural Specs List */}
-        <div className="space-y-2 bg-slate-950/40 border border-slate-800/60 rounded-xl p-3.5">
-          <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1 flex items-center gap-1.5">
-            <Activity className="w-3.5 h-3.5 text-ariiti-accent" />
+        <div className="space-y-2 bg-white/5 border border-white/10 rounded-xl p-3.5">
+          <p className="text-[10px] font-bold uppercase tracking-wider text-white/70 mb-1 flex items-center gap-1.5">
+            <Activity className="w-3.5 h-3.5 text-white" />
             <span>Architecture & Operational Specs</span>
           </p>
           <ul className="space-y-1.5">
             {current.specs.map((spec, idx) => (
               <li
                 key={idx}
-                className="flex items-start gap-2 text-xs text-slate-300 leading-snug"
+                className="flex items-start gap-2 text-xs text-white/80 leading-snug"
               >
-                <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-300 shrink-0 mt-0.5" />
                 <span>{spec}</span>
               </li>
             ))}
@@ -187,15 +187,15 @@ export const HeroInteractivePreview: React.FC = () => {
         </div>
 
         {/* Action Link Footer */}
-        <div className="pt-2 flex items-center justify-between border-t border-slate-800/60">
-          <div className="flex items-center gap-1.5 text-[11px] text-slate-400">
-            <span className="w-2 h-2 rounded-full bg-blue-500" />
+        <div className="pt-2 flex items-center justify-between border-t border-white/10">
+          <div className="flex items-center gap-1.5 text-[11px] text-white/60">
+            <span className="w-2 h-2 rounded-full bg-emerald-400" />
             <span>Standardized Regional Deployment</span>
           </div>
 
           <Link
             href={current.ctaUrl}
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-ariiti-accent hover:text-blue-300 transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:underline transition-all"
           >
             <span>{current.ctaText}</span>
             <ArrowRight className="w-3.5 h-3.5" />
