@@ -206,7 +206,7 @@ describe("Validation Schemas (src/lib/validations/)", () => {
         problemAddressed: "Stock mismatch causing sales delays and manual calculation errors.",
         solutionImplemented: "Custom Next.js inventory system with offline receipt generation.",
         technologiesAndEquipment: [], // Empty!
-        coverImageUrl: "https://images.unsplash.com/photo-1556742049-0a67c5574f73",
+        coverImageUrl: "https://images.unsplash.com/photo-1556740758-90de374c12ad",
       };
 
       const result = createCaseStudySchema.safeParse(invalidCaseStudy);

@@ -334,9 +334,9 @@ async function seedDatabase() {
           "Zero inventory accounting discrepancies reported during pilot testing shifts",
         ],
         coverImageUrl:
-          "https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=1200&q=80",
+          "https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=1200&q=80",
         galleryImageUrls: [
-          "https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=1200&q=80",
+          "https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=1200&q=80",
           "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1200&q=80",
         ],
         liveOrDemoUrl: "https://pos.ariititech.com",
@@ -509,7 +509,7 @@ Commercial retail environments in Harar and Dire Dawa face unique infrastructure
         readTime: "4 min read",
         isPublished: true,
         publishedAt: new Date("2026-03-01"),
-        coverImageUrl: "https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=1200&q=80",
+        coverImageUrl: "https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=1200&q=80",
       },
       {
         title: "Why Cat6 Structured Cabling Outperforms Mesh Wi-Fi in Commercial Buildings",

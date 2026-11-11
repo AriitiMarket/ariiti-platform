@@ -44,7 +44,7 @@ const FALLBACK_UNITS: OperationalUnit[] = [
       "Cash drawer RJ11 electrical surge isolation",
     ],
     imageUrl:
-      "https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=800&q=80",
     ctaText: "Inquire on POS Deployment",
     ctaHref: "/contact?category=HARDWARE_EQUIPMENT",
   },

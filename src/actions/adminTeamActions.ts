@@ -22,7 +22,7 @@ const DEFAULT_SQUADS = [
       "Dual-screen customer display sync",
       "Barcode scanner & electronic cash drawer triggers",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=800&q=80",
     ctaText: "Inquire on POS Deployment",
     ctaHref: "/contact?category=HARDWARE_EQUIPMENT",
     order: 1,
