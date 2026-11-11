@@ -20,7 +20,9 @@ import {
   ExternalLink,
   ChevronRight,
   X,
+  LogOut,
 } from "lucide-react";
+import { signOut } from "next-auth/react";
 import { UserRole } from "@/models/User";
 import { cn } from "@/lib/utils";
 import AriitiLogo from "@/components/ui/AriitiLogo";
@@ -155,6 +157,13 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
     return pathname.startsWith(href);
   };
 
+  const handleSignOut = async () => {
+    try {
+      await signOut({ redirect: false, callbackUrl: "/admin/login" });
+    } catch {}
+    window.location.href = "/admin/login";
+  };
+
   const sidebarContent = (
     <div className="flex flex-col h-full bg-brand-primary border-r border-[#0d3f6d] select-none text-white">
       {/* Brand Header with Official Ariiti Tech Logo */}
@@ -225,8 +234,8 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
         })}
       </nav>
 
-      {/* Live Website Shortcut */}
-      <div className="p-3 border-t border-[#0d3f6d] shrink-0">
+      {/* Live Website Shortcut & Sign Out */}
+      <div className="p-3 border-t border-[#0d3f6d] shrink-0 space-y-2">
         <Link
           href="/"
           target="_blank"
@@ -235,6 +244,15 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
           <span className="font-medium text-[11px]">View Live Website</span>
           <ExternalLink className="w-3.5 h-3.5 text-white/80" />
         </Link>
+
+        <button
+          type="button"
+          onClick={handleSignOut}
+          className="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 text-xs text-white/90 hover:text-white transition-colors cursor-pointer"
+        >
+          <span className="font-medium text-[11px]">Sign Out</span>
+          <LogOut className="w-3.5 h-3.5 text-white/70" />
+        </button>
       </div>
     </div>
   );

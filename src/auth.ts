@@ -12,6 +12,7 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "/admin/login",
+    signOut: "/admin/login",
     error: "/admin/login",
   },
   providers: [
@@ -79,6 +80,15 @@ export const authOptions: NextAuthOptions = {
         session.user.role = token.role as UserRole;
       }
       return session;
+    },
+    async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // Allows callback URLs on the same origin
+      try {
+        if (new URL(url).origin === baseUrl) return url;
+      } catch {}
+      return `${baseUrl}/admin/login`;
     },
   },
   secret: process.env.NEXTAUTH_SECRET,

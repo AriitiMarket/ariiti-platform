@@ -100,8 +100,11 @@ export const AdminTopbar: React.FC<AdminTopbarProps> = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleSignOut = () => {
-    signOut({ callbackUrl: "/admin/login" });
+  const handleSignOut = async () => {
+    try {
+      await signOut({ redirect: false, callbackUrl: "/admin/login" });
+    } catch {}
+    window.location.href = "/admin/login";
   };
 
   const getResultIcon = (type: string) => {
