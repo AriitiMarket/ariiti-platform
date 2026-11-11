@@ -9,17 +9,21 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "raw.githubusercontent.com",
+        hostname: "plus.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
+      {
+        protocol: "http",
+        hostname: "127.0.0.1",
       },
     ],
-  },
-  webpack: (config, { dev }) => {
-    if (dev) {
-      config.cache = {
-        type: "memory",
-      };
-    }
-    return config;
   },
 };
 
