@@ -9,7 +9,7 @@ import {
   Plus,
   Trash2,
 } from "lucide-react";
-import { upsertCaseStudy } from "@/actions/adminCmsActions";
+import { upsertCaseStudy } from "@/actions/admin/cms";
 import { slugify } from "@/lib/utils";
 
 interface CaseStudyFormProps {

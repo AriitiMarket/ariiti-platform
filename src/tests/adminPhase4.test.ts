@@ -5,8 +5,8 @@ import {
   createCaseStudySchema,
   updateCaseStudySchema,
 } from "../lib/validations/caseStudy";
-import { updateInquiryStatus, addInquiryNote } from "../actions/adminInquiryActions";
-import { upsertCaseStudy, updateProductLifecycle } from "../actions/adminCmsActions";
+import { updateInquiryStatus, addInquiryNote } from "../actions/admin/inquiries";
+import { upsertCaseStudy, updateProductLifecycle } from "../actions/admin/cms";
 
 describe("Phase 4 - Admin Authentication, RBAC & CMS Actions", () => {
   describe("Password Hashing & Verification (bcryptjs)", () => {

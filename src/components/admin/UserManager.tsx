@@ -18,7 +18,7 @@ import {
   createAdminUser,
   toggleUserStatus,
   updateUserRole,
-} from "@/actions/adminUserActions";
+} from "@/actions/admin/users";
 
 interface UserItem {
   _id: string;

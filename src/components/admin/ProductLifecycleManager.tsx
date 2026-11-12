@@ -15,7 +15,7 @@ import {
 import {
   updateProductLifecycle,
   upsertProduct,
-} from "@/actions/adminCmsActions";
+} from "@/actions/admin/cms";
 import { slugify } from "@/lib/utils";
 
 export interface SerializedProduct {

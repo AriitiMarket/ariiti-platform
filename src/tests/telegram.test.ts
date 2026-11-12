@@ -1,8 +1,8 @@
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
-import { formatInquiryTelegramMessage } from "../lib/telegram";
+import { formatInquiryTelegramMessage } from "../lib/notifications";
 
-describe("Telegram Alert Notification Service (src/lib/telegram.ts)", () => {
+describe("Telegram Alert Notification Service (src/lib/notifications.ts)", () => {
   test("formats clean markdown message with all inquiry details", () => {
     const inquiry = {
       customerName: "Abdi Hassen",

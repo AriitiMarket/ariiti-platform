@@ -1,9 +1,9 @@
 import { test, describe, beforeEach } from "node:test";
 import assert from "node:assert/strict";
-import { createCustomerInquiry } from "../actions/inquiryActions";
+import { createCustomerInquiry } from "../actions/public/inquiries";
 import { resetRateLimit } from "../lib/rateLimit";
 
-describe("Customer Inquiry Server Action (src/app/actions/inquiryActions.ts)", () => {
+describe("Customer Inquiry Server Action (src/actions/public/inquiries.ts)", () => {
   beforeEach(() => {
     resetRateLimit("127.0.0.1");
   });

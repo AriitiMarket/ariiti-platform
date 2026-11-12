@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useTransition } from "react";
-import { createCustomerInquiry } from "@/actions/inquiryActions";
+import { createCustomerInquiry } from "@/actions/public/inquiries";
 import { buildWhatsAppUrl } from "@/lib/utils";
 import Button from "@/components/ui/Button";
 import {

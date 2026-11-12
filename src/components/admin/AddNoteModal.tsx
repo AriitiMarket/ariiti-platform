@@ -2,7 +2,7 @@
 
 import React, { useState, useTransition } from "react";
 import { MessageSquare, Plus, X, Loader2 } from "lucide-react";
-import { addInquiryNote } from "@/actions/adminInquiryActions";
+import { addInquiryNote } from "@/actions/admin/inquiries";
 
 interface AddNoteModalProps {
   inquiryId: string;

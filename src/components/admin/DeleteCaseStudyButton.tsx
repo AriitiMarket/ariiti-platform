@@ -2,7 +2,7 @@
 
 import React, { useTransition } from "react";
 import { Trash2, Loader2 } from "lucide-react";
-import { deleteCaseStudy } from "@/actions/adminCmsActions";
+import { deleteCaseStudy } from "@/actions/admin/cms";
 
 interface DeleteCaseStudyButtonProps {
   id: string;

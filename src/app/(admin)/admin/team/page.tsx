@@ -3,7 +3,7 @@ import connectDB from "@/lib/mongodb";
 import TeamSquad from "@/models/TeamSquad";
 import TeamMember from "@/models/TeamMember";
 import TeamManager from "@/components/admin/TeamManager";
-import { ensureDefaultTeamData } from "@/actions/adminTeamActions";
+import { ensureDefaultTeamData } from "@/actions/admin/team";
 
 export const dynamic = "force-dynamic";
 
