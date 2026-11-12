@@ -12,7 +12,7 @@ import {
   Loader2,
   AlertCircle,
 } from "lucide-react";
-import { upsertService, deleteService } from "@/actions/adminCmsActions";
+import { upsertService, deleteService } from "@/actions/admin/cms";
 
 interface ServiceItem {
   _id: string;

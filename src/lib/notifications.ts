@@ -1,5 +1,5 @@
 export interface InquiryNotificationPayload {
-  id: string;
+  id?: string;
   customerName: string;
   businessName?: string;
   phone: string;
@@ -18,8 +18,45 @@ export interface InquiryNotificationPayload {
 /**
  * Helper to escape Markdown special characters for Telegram Bot API Markdown v1
  */
-function escapeMarkdown(text: string): string {
+export function escapeMarkdown(text: string): string {
   return text.replace(/[_*[\]()~`>#+\-=|{}.!]/g, "\\$&");
+}
+
+/**
+ * Formats a clean Markdown message for the Ariiti Tech Operations team Telegram channel.
+ */
+export function formatInquiryTelegramMessage(
+  inquiry: InquiryNotificationPayload | Record<string, any>
+): string {
+  const cleanPhone = (inquiry.phone || "").replace(/[^0-9]/g, "");
+  const waUrl = `https://wa.me/${cleanPhone}`;
+  const telUrl = `tel:${inquiry.phone}`;
+
+  return [
+    `🚨 *NEW LEAD RECEIVED — ARIITI TECH*`,
+    `━━━━━━━━━━━━━━━━━━━━━━━━━`,
+    inquiry.id ? `🔖 *Reference ID:* \`#${inquiry.id}\`` : null,
+    `👤 *Client Name:* ${escapeMarkdown(inquiry.customerName || "N/A")}`,
+    inquiry.businessName ? `🏢 *Business:* ${escapeMarkdown(inquiry.businessName)}` : null,
+    `📍 *Location:* ${escapeMarkdown(inquiry.location || "N/A")}`,
+    `📞 *Phone:* \`${inquiry.phone || "N/A"}\``,
+    inquiry.email ? `✉️ *Email:* ${escapeMarkdown(inquiry.email)}` : null,
+    `━━━━━━━━━━━━━━━━━━━━━━━━━`,
+    `🛠️ *Service Requested:*`,
+    `*${escapeMarkdown(inquiry.requestedServiceTitle || "General Inquiry")}*`,
+    `📁 *Category:* \`${inquiry.serviceCategory || "GENERAL"}\``,
+    `━━━━━━━━━━━━━━━━━━━━━━━━━`,
+    `📝 *Project Description:*`,
+    `_${escapeMarkdown(inquiry.projectDescription || "No details provided.")}_`,
+    inquiry.referralContext?.sourcePage
+      ? `\n🌐 *Converted Via:* \`${inquiry.referralContext.sourcePage}\``
+      : null,
+    `━━━━━━━━━━━━━━━━━━━━━━━━━`,
+    `⚡ *Quick Actions:*`,
+    `👉 [Open WhatsApp Chat](${waUrl}) | [Direct Phone Call](${telUrl})`,
+  ]
+    .filter(Boolean)
+    .join("\n");
 }
 
 /**
@@ -34,57 +71,12 @@ export async function sendInquiryNotification(
 
   if (!token || !chatId) {
     console.info(
-      `[DEV NOTIFICATION NOTICE] New lead received (Ref #${inquiry.id}). Telegram alert skipped because TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is not configured in .env.local`
+      `[DEV NOTIFICATION NOTICE] New lead received (Ref #${inquiry.id || "N/A"}). Telegram alert skipped because TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is not configured in .env.local`
     );
     return;
   }
 
-  const cleanPhone = inquiry.phone.replace(/[^0-9]/g, "");
-  const waUrl = `https://wa.me/${cleanPhone}`;
-  const telUrl = `tel:${inquiry.phone}`;
-
-  const lines = [
-    `🚨 *NEW INQUIRY RECEIVED — ARIITI TECH*`,
-    `━━━━━━━━━━━━━━━━━━━━━━━━━`,
-    `🔖 *Reference ID:* \`#${inquiry.id}\``,
-    `👤 *Client Name:* ${escapeMarkdown(inquiry.customerName)}`,
-    inquiry.businessName
-      ? `🏢 *Business / Org:* ${escapeMarkdown(inquiry.businessName)}`
-      : null,
-    `📍 *Location:* ${escapeMarkdown(inquiry.location)}`,
-    `📞 *Phone:* [${escapeMarkdown(inquiry.phone)}](${telUrl})`,
-    inquiry.email
-      ? `✉️ *Email:* [${escapeMarkdown(inquiry.email)}](mailto:${inquiry.email})`
-      : null,
-    `━━━━━━━━━━━━━━━━━━━━━━━━━`,
-    `🛠️ *Requested Service:*`,
-    `*${escapeMarkdown(inquiry.requestedServiceTitle)}*`,
-    `📁 *Category:* \`${inquiry.serviceCategory}\``,
-    `━━━━━━━━━━━━━━━━━━━━━━━━━`,
-    `📝 *Project Description:*`,
-    `_${escapeMarkdown(inquiry.projectDescription)}_`,
-    inquiry.referralContext?.sourcePage ||
-    inquiry.referralContext?.caseStudySlug ||
-    inquiry.referralContext?.productSlug
-      ? `\n🌐 *Attribution Context:* ${escapeMarkdown(
-          [
-            inquiry.referralContext.sourcePage &&
-              `Page: ${inquiry.referralContext.sourcePage}`,
-            inquiry.referralContext.caseStudySlug &&
-              `Case Study: ${inquiry.referralContext.caseStudySlug}`,
-            inquiry.referralContext.productSlug &&
-              `Product: ${inquiry.referralContext.productSlug}`,
-          ]
-            .filter(Boolean)
-            .join(" | ")
-        )}`
-      : null,
-    `━━━━━━━━━━━━━━━━━━━━━━━━━`,
-    `⚡ *Quick Response Actions:*`,
-    `👉 [Open WhatsApp Chat](${waUrl}) | [Direct Dial](${telUrl})`,
-  ];
-
-  const text = lines.filter(Boolean).join("\n");
+  const text = formatInquiryTelegramMessage(inquiry);
   const endpoint = `https://api.telegram.org/bot${token}/sendMessage`;
 
   try {

@@ -17,7 +17,7 @@ import {
 import {
   updateWebsiteSettings,
   UpdateSettingsInput,
-} from "@/actions/adminSettingsActions";
+} from "@/actions/admin/settings";
 
 interface SettingsFormProps {
   initialSettings: {

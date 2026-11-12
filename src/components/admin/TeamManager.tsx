@@ -27,7 +27,7 @@ import {
   upsertTeamMember,
   deleteTeamMember,
   toggleTeamMemberStatus,
-} from "@/actions/adminTeamActions";
+} from "@/actions/admin/team";
 
 export interface SquadItem {
   _id: string;

@@ -14,7 +14,7 @@ import {
   Loader2,
   AlertCircle,
 } from "lucide-react";
-import { upsertArticle, deleteArticle } from "@/actions/adminCmsActions";
+import { upsertArticle, deleteArticle } from "@/actions/admin/cms";
 
 interface ArticleItem {
   _id: string;

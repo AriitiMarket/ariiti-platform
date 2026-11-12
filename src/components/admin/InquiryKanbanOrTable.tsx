@@ -9,7 +9,7 @@ import {
   CheckCircle2,
   AlertCircle,
 } from "lucide-react";
-import { updateInquiryStatus } from "@/actions/adminInquiryActions";
+import { updateInquiryStatus } from "@/actions/admin/inquiries";
 
 export interface SerializedInquiry {
   _id: string;

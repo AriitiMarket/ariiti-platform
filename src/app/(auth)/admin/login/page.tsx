@@ -3,7 +3,7 @@
 import React, { useState, Suspense } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ShieldCheck, Lock, Mail, ArrowRight, AlertCircle, Loader2 } from "lucide-react";
+import { ShieldCheck, Lock, Mail, ArrowRight, AlertCircle, Loader2, Sparkles } from "lucide-react";
 import AriitiLogo from "@/components/ui/AriitiLogo";
 
 export const dynamic = "force-dynamic";
@@ -50,8 +50,30 @@ function LoginForm() {
     }
   };
 
+  const handleAutoFill = () => {
+    setEmail("admin@ariititech.com");
+    setPassword("AriitiAdmin2026!");
+    setError(null);
+  };
+
   return (
     <div className="bg-white border border-slate-200 rounded-2xl shadow-2xl p-6 sm:p-8 text-slate-900">
+      {/* Quick Autofill Helper for Demo / Testing */}
+      <div className="mb-6 p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between text-xs">
+        <div>
+          <span className="font-semibold text-slate-800 block text-xs">Test Credentials</span>
+          <span className="text-slate-500 font-mono text-[11px]">admin@ariititech.com</span>
+        </div>
+        <button
+          type="button"
+          onClick={handleAutoFill}
+          className="px-3 py-1.5 bg-brand-primary hover:bg-brand-primary-hover active:bg-[#061e35] text-white rounded-lg font-medium text-xs transition-colors flex items-center gap-1.5 shadow-xs cursor-pointer"
+        >
+          <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+          <span>Auto Fill</span>
+        </button>
+      </div>
+
       {error && (
         <div className="mb-6 p-3.5 rounded-xl bg-red-50 border border-red-200 flex items-start gap-3 text-xs text-red-700">
           <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />

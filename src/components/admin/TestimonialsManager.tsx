@@ -16,7 +16,7 @@ import {
   Loader2,
   AlertCircle,
 } from "lucide-react";
-import { upsertTestimonial, deleteTestimonial } from "@/actions/adminCmsActions";
+import { upsertTestimonial, deleteTestimonial } from "@/actions/admin/cms";
 
 interface TestimonialItem {
   _id: string;

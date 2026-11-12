@@ -18,7 +18,7 @@ import {
   Inbox,
 } from "lucide-react";
 import { UserRole } from "@/models/User";
-import { globalAdminSearch } from "@/actions/adminCmsActions";
+import { globalAdminSearch } from "@/actions/admin/cms";
 
 interface AdminTopbarProps {
   user?: {
